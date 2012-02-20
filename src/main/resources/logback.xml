@@ -1,0 +1,13 @@
+<configuration>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>[%-5level] [%thread] %d{yyyy-MM-dd HH:mm:ss.SSS}: %logger: %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<logger name="org.hyness" level="info" />
+
+	<root level="warn">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>
