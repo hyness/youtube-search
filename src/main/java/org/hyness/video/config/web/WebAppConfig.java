@@ -30,6 +30,6 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/hello.htm");
+		registry.addViewController("/search.htm");
 	}
 }

@@ -30,12 +30,23 @@ public class VideoServiceTest {
 	@Inject
 	private VideoService service;
 	
+	private String term = "blake griffin";
+	
 	@Test
 	public void search() throws Exception {
-		Result result = service.search("blake griffin");
+		Result result = service.search(term);
 		assertThat(result, notNullValue());
 		for (Video video : result.getData().getItems()) {
-			logger.debug("{}", video);
+			logger.debug("Page 1: {}", video.getTitle());
+		}
+	}
+	
+	@Test
+	public void searchPageTwo() throws Exception {
+		Result result = service.search(term, 2);
+		assertThat(result, notNullValue());
+		for (Video video : result.getData().getItems()) {
+			logger.debug("Page 2: {}", video.getTitle());
 		}
 	}
 }

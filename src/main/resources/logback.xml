@@ -5,9 +5,9 @@
 		</encoder>
 	</appender>
 	
-	<logger name="org.hyness" level="info" />
+	<logger name="org.hyness" level="debug" />
 
-	<root level="warn">
+	<root level="info">
 		<appender-ref ref="STDOUT" />
 	</root>
 </configuration>
