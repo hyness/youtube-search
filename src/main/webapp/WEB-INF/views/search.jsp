@@ -52,8 +52,8 @@
 				executeSearch($("#term").val(), 1);
 			});
 			
-			$("#term").keypress(function(e){
-				if (e.keyCode == 13) {
+			$("#term").keypress(function(event){
+				if (event.keyCode == 13) {
 					executeSearch($("#term").val(), 1);
 				}
 			}).focus();
@@ -61,8 +61,9 @@
 			$(document).on("click", "a.dynamiclink", function(event){
 				$("#myytplayer").get(0).loadVideoById(this.id);
 				event.preventDefault();
-			}).on("click", "a.page", function(){
+			}).on("click", "a.page", function(event){
 				executeSearch($("#term").val(), this.id);
+				event.preventDefault();
 			});
 		});
     </script>
