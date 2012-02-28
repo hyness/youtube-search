@@ -46,10 +46,6 @@ function executeSearch(query, page) {
 	});
 }
 
-$("#search").click(function(){
-	executeSearch($("#term").val(), 1);
-});
-
 $(document).on("click", "a.dynamiclink", function(event){
 	showVideo(this.id, $(this).html());
 	event.preventDefault();
@@ -59,6 +55,10 @@ $(document).on("click", "a.dynamiclink", function(event){
 });
 
 $(document).ready(function(){
+	$("#search").click(function(){
+		executeSearch($("#term").val(), 1);
+	});
+
 	$("#loader").ajaxStart(function(){
 		$(this).show();
 	}).ajaxStop(function(){
