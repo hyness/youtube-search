@@ -1,21 +1,21 @@
 function getPlayer(id, width, height) {
     var url = "http://www.youtube.com/embed/" + id + "?rel=0&autohide=1&autoplay=1&controls=1&fs=1";
-    var player = '<iframe title="YouTube video player" style="margin:0; padding:0;" width="' + width + '" ';
-    player += 'height="' + height + '" src="' + url + '" frameborder="0" allowfullscreen></iframe>';
-    return player;
+    return '<iframe title="YouTube video player" style="margin:0; padding:0;" width="' + width + '" ' + 
+    	'height="' + height + '" src="' + url + '" frameborder="0" allowfullscreen></iframe>';
 }
 
 function showVideo(id, title) {
 	var width = 640, height = 360;
 	var player = $("<div></div>");
 	$("body").append(player);
-	player.dialog({autoOpen: false, modal: true, resizable: false, position: 'center',  
+	player.dialog({
+		autoOpen: false, modal: true, resizable: false, position: 'center',  
 		width: 'auto', height: 'auto', title: title, 
 		close: function(){
-			player.html("");		
+			player.remove();		
 		}
 	});
-	player.html(getPlayer(id, width, height));
+	player.append(getPlayer(id, width, height));
 	player.dialog("open");
 }
 
@@ -24,25 +24,33 @@ function executeSearch(query, page) {
 		type: "GET",
 		url: "api/search/" + query + "/" + page,
 	}).done(function(msg) {
+		var response = $("#results").empty();
+		
 		if (msg.data.totalItems != 0) {
-			itemsPerPage = msg.data.itemsPerPage;
-			totalItems = msg.data.totalItems;
-			prevPage = parseInt(page) - 1;
-			nextPage = parseInt(page) + 1;
-			startIndex = msg.data.startIndex;
-			endIndex = page * itemsPerPage < totalItems ? page * itemsPerPage : totalItems;
-			prevLink = prevPage > 0 ? '<a id="'+prevPage+'" class="page" href="#">prev</a>' : 'prev';
-			nextLink = nextPage * itemsPerPage < totalItems ? '<a id="'+nextPage+'" class="page" href="#">next</a>' : 'next';
-			response = '<p>' + startIndex + '-' + endIndex + ' of ' + totalItems + '</p>';
-			response += '<p>'+prevLink+' | '+nextLink+'</p>';
+			var itemsPerPage = msg.data.itemsPerPage;
+			var totalItems = msg.data.totalItems;
+			var prevPage = parseInt(page) - 1;
+			var nextPage = parseInt(page) + 1;
+			var startIndex = msg.data.startIndex;
+			var endIndex = page * itemsPerPage < totalItems ? page * itemsPerPage : totalItems;
+			var prevLink = prevPage > 0 ? $('<a class="page" href="#">prev</a>').attr('id', prevPage) : 'prev';
+			var nextLink = endIndex < totalItems ? $('<a class="page" href="#">next</a>').attr('id', nextPage) : 'next';
+			var nav = $('<span class="nav"></span>').append(prevLink).append(' | ').append(nextLink);
+			
+			response.append($('<span></span>').append('Showing ' + startIndex + '-' + endIndex + ' of ' + totalItems + ' videos'))
+				.append(nav.clone());
+			var links = $('<ol></ol>').attr('start', startIndex);
 			$(msg.data.items).each(function(){
-				response += '<a id="'+this.id+'" class="dynamiclink" href="#">'+this.title+'</a><br />';
+				links.append($('<li></li>').append(
+					$('<a class="dynamiclink" href="#"></a>').attr('id', this.id).html(this.title)
+				));
 			});
+			response.append(links).append(nav.clone());
 		} else {
-			response = "<p>No Results</p>";
+			response.append("<p>No Results</p>");
 		}
 		
-		$("#results").empty().append(response);
+		response.show();
 	});
 }
 
@@ -70,4 +78,6 @@ $(document).ready(function(){
 			executeSearch($("#term").val(), 1);
 		}
 	}).focus();
+	
+	$("#results").hide();
 });
