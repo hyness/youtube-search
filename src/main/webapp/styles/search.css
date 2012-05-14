@@ -14,7 +14,6 @@ a:hover {
 	font-weight: bold;
 }
 ol {
-	width: 300;
 	margin: 0px;
 }
 .nav{
@@ -22,4 +21,8 @@ ol {
 }
 #results {
 	margin-top: 10px;
+}
+.error {
+	display: block;
+	color: #FF0000;
 }

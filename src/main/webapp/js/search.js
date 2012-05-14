@@ -23,34 +23,39 @@ function executeSearch(query, page) {
 	$.ajax({
 		type: "GET",
 		url: "api/search/" + query + "/" + page,
-	}).done(function(msg) {
-		var response = $("#results").empty();
-		
-		if (msg.data.totalItems != 0) {
-			var itemsPerPage = msg.data.itemsPerPage;
-			var totalItems = msg.data.totalItems;
-			var prevPage = parseInt(page) - 1;
-			var nextPage = parseInt(page) + 1;
-			var startIndex = msg.data.startIndex;
-			var endIndex = page * itemsPerPage < totalItems ? page * itemsPerPage : totalItems;
-			var prevLink = prevPage > 0 ? $('<a class="page" href="#">prev</a>').attr('id', prevPage) : 'prev';
-			var nextLink = endIndex < totalItems ? $('<a class="page" href="#">next</a>').attr('id', nextPage) : 'next';
-			var nav = $('<span class="nav"></span>').append(prevLink).append(' | ').append(nextLink);
+		success: function(response) {
+			var results = $("#results").empty();
 			
-			response.append($('<span></span>').append('Showing ' + startIndex + '-' + endIndex + ' of ' + totalItems + ' videos'))
-				.append(nav.clone());
-			var links = $('<ol></ol>').attr('start', startIndex);
-			$(msg.data.items).each(function(){
-				links.append($('<li></li>').append(
-					$('<a class="dynamiclink" href="#"></a>').attr('id', this.id).html(this.title)
-				));
-			});
-			response.append(links).append(nav.clone());
-		} else {
-			response.append("<p>No Results</p>");
+			if (response.data.totalItems != 0) {
+				var itemsPerPage = response.data.itemsPerPage;
+				var totalItems = response.data.totalItems;
+				var prevPage = parseInt(page) - 1;
+				var nextPage = parseInt(page) + 1;
+				var startIndex = response.data.startIndex;
+				var endIndex = page * itemsPerPage < totalItems ? page * itemsPerPage : totalItems;
+				var prevLink = prevPage > 0 ? $('<a class="page" href="#">prev</a>').attr('id', prevPage) : 'prev';
+				var nextLink = endIndex < totalItems ? $('<a class="page" href="#">next</a>').attr('id', nextPage) : 'next';
+				var nav = $('<span class="nav"></span>').append(prevLink).append(' | ').append(nextLink);
+				
+				results.append($('<span></span>').append('Showing ' + startIndex + '-' + endIndex + ' of ' + totalItems + ' videos'))
+					.append(nav.clone());
+				var links = $('<ol></ol>').attr('start', startIndex);
+				$(response.data.items).each(function(){
+					links.append($('<li></li>').append(
+						$('<a class="dynamiclink" href="#"></a>').attr('id', this.id).html(this.title)
+					));
+				});
+				results.append(links).append(nav.clone());
+			} else {
+				results.append("<p>No Results</p>");
+			}
+			
+			results.show();
+		}, 
+		error: function(event, status, xhr) {
+			$("#errors").append('<span class="error">Error performing search: ' + this.url + '</span>').
+				append('<span class="error">Return code: ' + event.status + "</span>").show();
 		}
-		
-		response.show();
 	});
 }
 
@@ -72,6 +77,10 @@ $(document).ready(function(){
 	}).ajaxStop(function(){
 		$(this).hide();
 	}).hide();
+	
+	$("#errors").ajaxStart(function(){
+		$(this).empty().hide();
+	});
 	
 	$("#term").keypress(function(event){
 		if (event.keyCode == 13) {

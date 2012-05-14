@@ -7,6 +7,7 @@ import org.hyness.video.config.AppConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -27,9 +28,16 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		resolver.setViewClass(JstlView.class);
 		return resolver;
 	}
-	
+
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/").setViewName("redirect:search.htm");
 		registry.addViewController("/search.htm");
+	}
+
+	@Override
+	public void configureDefaultServletHandling(
+			DefaultServletHandlerConfigurer configurer) {
+		configurer.enable();
 	}
 }
