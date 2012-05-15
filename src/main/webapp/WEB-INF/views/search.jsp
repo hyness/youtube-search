@@ -15,10 +15,7 @@
 			<input type="text" id="term" />    
 		    <input type="submit" id="search" value="search" />
 		    <img id="loader" alt="loader" src="img/ajax-loader.gif" />
-		    <p id="error"></p>
 		</section>
-    
-		<section id="errors"></section>
     
 		<section id="results"></section>
 	</body>

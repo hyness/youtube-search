@@ -22,13 +22,13 @@ public class SearchController {
 	private VideoService service;
 	
 	@ResponseBody
-	@RequestMapping(value = "/api/search/{term}", method = RequestMethod.GET)
+	@RequestMapping(value = "/search/{term}", method = RequestMethod.GET)
 	public Result search(@PathVariable String term) {
 		return service.search(term);
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/api/search/{term}/{page}", method = RequestMethod.GET)
+	@RequestMapping(value = "/search/{term}/{page}", method = RequestMethod.GET)
 	public Result searchPage(@PathVariable String term, @PathVariable int page) {
 		return service.search(term, page);
 	}
