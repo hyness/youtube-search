@@ -29,18 +29,17 @@ import org.springframework.web.client.RestTemplate;
 public class AppConfig {
 	@Bean
 	public RestTemplate restTemplate() {
-		RestTemplate template = new RestTemplate();
-		
 		ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         objectMapper.setVisibilityChecker(VisibilityChecker.Std.defaultInstance().withFieldVisibility(Visibility.ANY));
         
 		MappingJacksonHttpMessageConverter converter = new MappingJacksonHttpMessageConverter();
         converter.setObjectMapper(objectMapper);
-		List<HttpMessageConverter<?>> list = new ArrayList<HttpMessageConverter<?>>();
+		List<HttpMessageConverter<?>> list = new ArrayList<>();
 		list.add(converter);
+
+		RestTemplate template = new RestTemplate();
 		template.setMessageConverters(list);
-		
 		return template;
 	}
 	

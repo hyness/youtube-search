@@ -1,25 +1,24 @@
 package org.hyness.video.config.web;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
-
-import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
  * @author hyness
  */
-public class Initializer implements WebApplicationInitializer {
-	public void onStartup(ServletContext servletContext)
-			throws ServletException {
-		AnnotationConfigWebApplicationContext mvcContext = new AnnotationConfigWebApplicationContext();
-		mvcContext.register(WebAppConfig.class);
+public class Initializer extends
+		AbstractAnnotationConfigDispatcherServletInitializer {
+	@Override
+	protected Class<?>[] getRootConfigClasses() {
+		return null;
+	}
 
-		ServletRegistration.Dynamic dispatcher = servletContext.addServlet(
-				"dispatcher", new DispatcherServlet(mvcContext));
-		dispatcher.setLoadOnStartup(1);
-		dispatcher.addMapping("/");
+	@Override
+	protected Class<?>[] getServletConfigClasses() {
+		return new Class[] { WebAppConfig.class };
+	}
+
+	@Override
+	protected String[] getServletMappings() {
+		return new String[] { "/" };
 	}
 }

@@ -34,8 +34,7 @@ public class VideoServiceRestImpl implements VideoService {
 	
 	@Override
 	public Result search(String term, int page) {
-		int startIndex = getStartIndex(page);
-		return template.getForObject(searchUrl, Result.class, term, startIndex, maxResults);
+		return template.getForObject(searchUrl, Result.class, term, getStartIndex(page), maxResults);
 	}
 	
 	@Override
@@ -45,8 +44,7 @@ public class VideoServiceRestImpl implements VideoService {
 	
 	@Override
 	public Result getMostPopular(int page) {
-		int startIndex = getStartIndex(page);
-		return template.getForObject(popularUrl, Result.class, startIndex, maxResults);
+		return template.getForObject(popularUrl, Result.class, getStartIndex(page), maxResults);
 	}
 
 	private int getStartIndex(int page) {
