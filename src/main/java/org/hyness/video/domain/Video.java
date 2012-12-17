@@ -1,23 +1,23 @@
 package org.hyness.video.domain;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import com.google.common.base.Objects;
 
 /**
  * @author Hy Goldsher
  */
 public class Video {
 	private String id;
-	
+
 	private String title;
 
 	private String description;
-	
+
 	private String category;
-	
+
 	private int viewCount;
-	
+
 	private int favoriteCount;
-	
+
 	public String getId() {
 		return id;
 	}
@@ -68,6 +68,9 @@ public class Video {
 
 	@Override
 	public String toString() {
-		return new ReflectionToStringBuilder(this).toString();
+		return Objects.toStringHelper(this).add("id", id).add("title", title)
+				.add("description", description).add("category", category)
+				.add("viewCount", viewCount)
+				.add("favoriteCount", favoriteCount).toString();
 	}
 }

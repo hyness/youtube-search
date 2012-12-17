@@ -1,15 +1,15 @@
 package org.hyness.video.domain;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import com.google.common.base.Objects;
 
 /**
  * @author Hy Goldsher
  */
 public class Result {
 	private String apiVersion;
-	
+
 	private Data data;
-	
+
 	public String getApiVersion() {
 		return apiVersion;
 	}
@@ -28,6 +28,7 @@ public class Result {
 
 	@Override
 	public String toString() {
-		return new ReflectionToStringBuilder(this).toString();
+		return Objects.toStringHelper(this).add("apiVersion", apiVersion)
+				.add("data", data).toString();
 	}
 }

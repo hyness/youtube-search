@@ -3,22 +3,22 @@ package org.hyness.video.domain;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import com.google.common.base.Objects;
 
 /**
  * @author Hy Goldsher
  */
 public class Data {
 	private int totalItems;
-	
+
 	private int startIndex;
-	
+
 	private int itemsPerPage;
-	
+
 	private Date updated;
-	
+
 	private List<Video> items;
-	
+
 	public int getTotalItems() {
 		return totalItems;
 	}
@@ -61,6 +61,9 @@ public class Data {
 
 	@Override
 	public String toString() {
-		return new ReflectionToStringBuilder(this).toString();
+		return Objects.toStringHelper(this).add("totalItems", totalItems)
+				.add("statrtIndex", startIndex)
+				.add("itemsPerPage", itemsPerPage).add("updated", updated)
+				.add("items", items).toString();
 	}
 }

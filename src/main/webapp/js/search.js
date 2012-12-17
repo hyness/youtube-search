@@ -22,7 +22,7 @@ function showVideo(id, title) {
 function executeSearch(query, page) {
 	$.ajax({
 		type: "GET",
-		url: "api/search/" + query + "/" + page,
+		url: "search/" + query + "/" + page,
 	}).done(function(msg) {
 		var response = $("#results").empty();
 		

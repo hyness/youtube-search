@@ -20,6 +20,6 @@ public class Initializer implements WebApplicationInitializer {
 		ServletRegistration.Dynamic dispatcher = servletContext.addServlet(
 				"dispatcher", new DispatcherServlet(mvcContext));
 		dispatcher.setLoadOnStartup(1);
-		dispatcher.addMapping("*.htm", "/api/*");
+		dispatcher.addMapping("/");
 	}
 }
