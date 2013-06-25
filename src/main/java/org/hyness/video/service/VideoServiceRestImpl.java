@@ -34,7 +34,7 @@ public class VideoServiceRestImpl implements VideoService {
 	
 	@Override
 	public Result search(String term, int page) {
-		return search(term, false, 1);
+		return search(term, false, page);
 	}
 	
 	@Override
