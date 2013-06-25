@@ -19,10 +19,10 @@ function showVideo(id, title) {
 	player.dialog("open");
 }
 
-function executeSearch(query, page) {
+function executeSearch(query, hd, page) {
 	$.ajax({
 		type: "GET",
-		url: "search/" + query + "/" + page,
+		url: "search/" + query + "/" + hd + "/" + page,
 	}).done(function(msg) {
 		var response = $("#results").empty();
 		
@@ -58,13 +58,13 @@ $(document).on("click", "a.dynamiclink", function(event){
 	showVideo(this.id, $(this).html());
 	event.preventDefault();
 }).on("click", "a.page", function(event){
-	executeSearch($("#term").val(), this.id);
+	executeSearch($("#term").val(), $("#hd").prop('checked'), this.id);
 	event.preventDefault();
 });
 
 $(document).ready(function(){
 	$("#search").click(function(){
-		executeSearch($("#term").val(), 1);
+		executeSearch($("#term").val(), $("#hd").prop('checked'), 1);
 	});
 
 	$("#loader").ajaxStart(function(){
@@ -75,7 +75,7 @@ $(document).ready(function(){
 	
 	$("#term").keypress(function(event){
 		if (event.keyCode == 13) {
-			executeSearch($("#term").val(), 1);
+			executeSearch($("#term").val(), $("#hd").prop('checked'), 1);
 		}
 	}).focus();
 	

@@ -28,8 +28,8 @@ public class SearchController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/search/{term}/{page}", method = RequestMethod.GET)
-	public Result searchPage(@PathVariable String term, @PathVariable int page) {
-		return service.search(term, page);
+	@RequestMapping(value = "/search/{term}/{hd}/{page}", method = RequestMethod.GET)
+	public Result searchPage(@PathVariable String term, @PathVariable boolean hd, @PathVariable int page) {
+		return service.search(term, hd, page);
 	}
 }

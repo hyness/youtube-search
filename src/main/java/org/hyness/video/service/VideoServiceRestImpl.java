@@ -29,12 +29,18 @@ public class VideoServiceRestImpl implements VideoService {
 
 	@Override
 	public Result search(String term) {
-		return search(term, 1);
+		return search(term, false, 1);
 	}
 	
 	@Override
 	public Result search(String term, int page) {
-		return template.getForObject(searchUrl, Result.class, term, getStartIndex(page), maxResults);
+		return search(term, false, 1);
+	}
+	
+	@Override
+	public Result search(String term, boolean hd, int page) {
+		return template.getForObject(searchUrl + (hd ? "&hd=true" :""), 
+				Result.class, term, getStartIndex(page), maxResults);
 	}
 	
 	@Override

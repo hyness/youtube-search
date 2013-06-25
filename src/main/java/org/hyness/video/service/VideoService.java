@@ -15,6 +15,8 @@ public interface VideoService {
 
 	Result search(String term, int page);
 
+	Result search(String term, boolean hd, int page);
+	
 	Result getMostPopular();
 
 	Result getMostPopular(int page);

@@ -13,6 +13,7 @@
 		<section id="searchForm">
 			<label for="term">Search for videos:</label>
 			<input type="text" id="term" />    
+		    <input type="checkbox" id="hd" name="hd" /> HD
 		    <input type="submit" id="search" value="search" />
 		    <img id="loader" alt="loader" src="img/ajax-loader.gif" />
 		</section>
