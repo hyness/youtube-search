@@ -3,12 +3,14 @@
  */
 package org.hyness.video.service;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.hyness.video.domain.Result;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 /**
  * @author Hy Goldsher
@@ -24,8 +26,16 @@ public class VideoServiceRestImpl implements VideoService {
 	@Value("${videoService.searchUrl}")
 	private String searchUrl;
 	
+	private String searchHdUrl;
+	
 	@Value("${videoService.popularUrl}")
 	private String popularUrl;
+	
+	@PostConstruct
+	public void init() {
+		searchHdUrl = UriComponentsBuilder.fromHttpUrl(searchUrl)
+				.queryParam("hd", "true").build().toString();
+	}
 
 	@Override
 	public Result search(String term) {
@@ -39,7 +49,7 @@ public class VideoServiceRestImpl implements VideoService {
 	
 	@Override
 	public Result search(String term, boolean hd, int page) {
-		return template.getForObject(searchUrl + (hd ? "&hd=true" :""), 
+		return template.getForObject(hd ? searchHdUrl : searchUrl, 
 				Result.class, term, getStartIndex(page), maxResults);
 	}
 	
