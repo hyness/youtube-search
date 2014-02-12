@@ -4,6 +4,7 @@
 package org.hyness.video.config;
 
 import org.hyness.video.BasePackage;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
  * @author Hy Goldsher
  */
 @Configuration
+@EnableAutoConfiguration
 @ComponentScan(basePackageClasses = BasePackage.class)
 @PropertySource("classpath:/application.properties")
 public class AppConfig {
