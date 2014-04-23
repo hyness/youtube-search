@@ -2,9 +2,6 @@ package org.hyness.video.domain;
 
 import com.google.common.base.Objects;
 
-/**
- * @author Hy Goldsher
- */
 public class Result {
 	private String apiVersion;
 
@@ -14,16 +11,8 @@ public class Result {
 		return apiVersion;
 	}
 
-	public void setApiVersion(String apiVersion) {
-		this.apiVersion = apiVersion;
-	}
-
 	public Data getData() {
 		return data;
-	}
-
-	public void setData(Data data) {
-		this.data = data;
 	}
 
 	@Override

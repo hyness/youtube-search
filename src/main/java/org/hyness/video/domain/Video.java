@@ -6,9 +6,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.Objects;
 
-/**
- * @author Hy Goldsher
- */
 @JsonDeserialize(builder = Builder.class)
 public class Video {
 	private final String id;

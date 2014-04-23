@@ -1,42 +1,29 @@
-/**
- * 
- */
 package org.hyness.video.service;
 
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.hyness.video.domain.Result;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
-/**
- * @author Hy Goldsher
- */
 @Service("videoService")
+@ConfigurationProperties("videoService")
 public class VideoServiceRestImpl implements VideoService {
 	@Inject
 	private RestTemplate template;
 	
-	@Value("${videoService.maxResults}")
-	private int maxResults;
-	
-	@Value("${videoService.searchUrl}")
+	@Min(1)
+	private int maxResults = 20;
+
+	@NotNull
 	private String searchUrl;
 	
-	private String searchHdUrl;
-	
-	@Value("${videoService.popularUrl}")
+	@NotNull
 	private String popularUrl;
 	
-	@PostConstruct
-	public void init() {
-		searchHdUrl = UriComponentsBuilder.fromHttpUrl(searchUrl)
-				.queryParam("hd", "true").build().toString();
-	}
-
 	@Override
 	public Result search(String term) {
 		return search(term, false, 1);
@@ -49,8 +36,12 @@ public class VideoServiceRestImpl implements VideoService {
 	
 	@Override
 	public Result search(String term, boolean hd, int page) {
-		return template.getForObject(hd ? searchHdUrl : searchUrl, 
-				Result.class, term, getStartIndex(page), maxResults);
+		return template.getForObject(getSearchUrl(hd), Result.class, term,
+				getStartIndex(page), maxResults);
+	}
+
+	private String getSearchUrl(boolean hd) {
+		return hd ? searchUrl + "&hd=true" : searchUrl;
 	}
 	
 	@Override
@@ -65,5 +56,17 @@ public class VideoServiceRestImpl implements VideoService {
 
 	private int getStartIndex(int page) {
 		return ((page - 1) * maxResults) + 1;
+	}
+
+	public void setMaxResults(int maxResults) {
+		this.maxResults = maxResults;
+	}
+
+	public void setSearchUrl(String searchUrl) {
+		this.searchUrl = searchUrl;
+	}
+
+	public void setPopularUrl(String popularUrl) {
+		this.popularUrl = popularUrl;
 	}
 }

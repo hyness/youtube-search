@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.hyness.video.service;
 
 import static com.google.common.base.Charsets.UTF_8;
@@ -24,13 +21,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.google.common.io.Resources;
 
-/**
- * @author Hy Goldsher
- */
 public class VideoServiceTest {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
-	private VideoService service;
+	private VideoServiceRestImpl service;
 	
 	private RestTemplate template = new RestTemplate();
 	
@@ -38,7 +32,7 @@ public class VideoServiceTest {
 	
 	private String searchUrl = "http://localhost/search?q={query}&start-index={startIndex}&max-results={maxResults}";
 	
-	private String popularUrl = "http://localhost/popular?q={query}&start-index={startIndex}&max-results={maxResults}";
+	private String popularUrl = "http://localhost/popular?start-index={startIndex}&max-results={maxResults}";
 	
 	private MockRestServiceServer mockServer;
 
@@ -51,9 +45,9 @@ public class VideoServiceTest {
 		service = new VideoServiceRestImpl();
 		mockServer = MockRestServiceServer.createServer(template);
 		setField(service, "template", template);
-		setField(service, "maxResults", maxResults);
-		setField(service, "searchUrl", searchUrl);
-		setField(service, "popularUrl", popularUrl);
+		service.setMaxResults(maxResults);
+		service.setSearchUrl(searchUrl);
+		service.setPopularUrl(popularUrl);
 		searchResult = Resources.toString(Resources.getResource("search-result.json"), UTF_8);
 	}
 	
@@ -84,8 +78,32 @@ public class VideoServiceTest {
 	@Test
 	public void searchWithPageAndHd() throws Exception {
 		String expectedUrl = UriComponentsBuilder.fromHttpUrl(searchUrl).buildAndExpand(term, 41, maxResults).toString();
+		mockServer.expect(requestTo(expectedUrl + "&hd=true")).andRespond(withSuccess(searchResult, APPLICATION_JSON));
+		Result result = service.search(term, true, 5);
+		mockServer.verify();
+		
+		logger.debug("result: {}", result);
+		assertThat(result).isNotNull();
+		assertThat(result.getData()).isNotNull();
+	}
+	
+	@Test
+	public void popular() throws Exception {
+		String expectedUrl = UriComponentsBuilder.fromHttpUrl(popularUrl).buildAndExpand(1, maxResults).toString();
 		mockServer.expect(requestTo(expectedUrl)).andRespond(withSuccess(searchResult, APPLICATION_JSON));
-		Result result = service.search(term, 5);
+		Result result = service.getMostPopular();
+		mockServer.verify();
+		
+		logger.debug("result: {}", result);
+		assertThat(result).isNotNull();
+		assertThat(result.getData()).isNotNull();
+	}
+	
+	@Test
+	public void popularWithPage() throws Exception {
+		String expectedUrl = UriComponentsBuilder.fromHttpUrl(popularUrl).buildAndExpand(41, maxResults).toString();
+		mockServer.expect(requestTo(expectedUrl)).andRespond(withSuccess(searchResult, APPLICATION_JSON));
+		Result result = service.getMostPopular(5);
 		mockServer.verify();
 		
 		logger.debug("result: {}", result);
