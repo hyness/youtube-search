@@ -1,6 +1,6 @@
 package org.hyness.video.domain;
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 public class Result {
 	private String apiVersion;
@@ -17,7 +17,7 @@ public class Result {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).add("apiVersion", apiVersion)
+		return MoreObjects.toStringHelper(this).add("apiVersion", apiVersion)
 				.add("data", data).toString();
 	}
 }

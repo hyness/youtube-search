@@ -4,7 +4,7 @@ import org.hyness.video.domain.Video.Builder;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 @JsonDeserialize(builder = Builder.class)
 public class Video {
@@ -55,7 +55,7 @@ public class Video {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).add("id", id).add("title", title)
+		return MoreObjects.toStringHelper(this).add("id", id).add("title", title)
 				.add("description", description).add("category", category)
 				.add("viewCount", viewCount)
 				.add("favoriteCount", favoriteCount).toString();
