@@ -2,7 +2,7 @@ package org.hyness.video.service;
 
 import static com.google.common.base.Charsets.UTF_8;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.util.ReflectionTestUtils.setField;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;

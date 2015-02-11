@@ -1,23 +1,22 @@
 package org.hyness.video.domain;
 
+import lombok.Getter;
+import lombok.ToString;
+
 import org.hyness.video.domain.Video.Builder;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.google.common.base.MoreObjects;
 
+@Getter
+@ToString
 @JsonDeserialize(builder = Builder.class)
 public class Video {
 	private final String id;
-
 	private final String title;
-
 	private final String description;
-
 	private final String category;
-
 	private final int viewCount;
-
 	private final int favoriteCount;
 	
 	private Video(Builder builder) {
@@ -28,51 +27,14 @@ public class Video {
 		this.viewCount = builder.viewCount;
 		this.favoriteCount = builder.favoriteCount;
 	}
-
-	public String getId() {
-		return id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public String getCategory() {
-		return category;
-	}
-
-	public int getViewCount() {
-		return viewCount;
-	}
-
-	public int getFavoriteCount() {
-		return favoriteCount;
-	}
-
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this).add("id", id).add("title", title)
-				.add("description", description).add("category", category)
-				.add("viewCount", viewCount)
-				.add("favoriteCount", favoriteCount).toString();
-	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
 	public static class Builder {
 		private String id;
-
 		private String title;
-
 		private String description;
-
 		private String category;
-
 		private int viewCount;
-
 		private int favoriteCount;
 
 		public Builder withId(String id) {

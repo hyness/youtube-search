@@ -4,12 +4,15 @@ import javax.inject.Inject;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import lombok.Setter;
+
 import org.hyness.video.domain.Result;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service("videoService")
+@Setter
 @ConfigurationProperties("videoService")
 public class VideoServiceRestImpl implements VideoService {
 	@Inject
@@ -56,17 +59,5 @@ public class VideoServiceRestImpl implements VideoService {
 
 	private int getStartIndex(int page) {
 		return ((page - 1) * maxResults) + 1;
-	}
-
-	public void setMaxResults(int maxResults) {
-		this.maxResults = maxResults;
-	}
-
-	public void setSearchUrl(String searchUrl) {
-		this.searchUrl = searchUrl;
-	}
-
-	public void setPopularUrl(String popularUrl) {
-		this.popularUrl = popularUrl;
 	}
 }
