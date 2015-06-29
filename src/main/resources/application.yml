@@ -1,7 +1,6 @@
-# Spring properties
-management:
-    contextPath: /manage
-    
+video-service:
+    search-url: https://www.googleapis.com/youtube/v3/search?q={term}&type=video&videoDefinition={videoDefinition}&pageToken={pageToken}&maxResults={maxResults}&key={apiKey}&part=snippet
+
 security:
     ignored:
         - /*
@@ -9,9 +8,21 @@ security:
         - /js/**
         - /img/**
         - /search/**
-    user:
-        name: myuser
-        password: p@ssw0rd
+---
+spring:
+  profiles: "!prod"
 
-video-service:
-    search-url: https://www.googleapis.com/youtube/v3/search?q={term}&type=video&videoDefinition={videoDefinition}&pageToken={pageToken}&maxResults={maxResults}&key={apiKey}&part=snippet
+security:
+  basic:
+    enabled: false
+
+management:
+  security:
+    enabled: false
+
+---
+spring:
+  profiles: prod
+
+management:
+    contextPath: /manage

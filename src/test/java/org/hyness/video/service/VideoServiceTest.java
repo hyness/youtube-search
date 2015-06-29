@@ -4,8 +4,8 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hyness.video.domain.VideoDefinition.ANY;
-import static org.hyness.video.domain.VideoDefinition.HIGH;
+import static org.hyness.video.service.VideoService.VideoDefinition.ANY;
+import static org.hyness.video.service.VideoService.VideoDefinition.HIGH;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -59,7 +59,7 @@ public class VideoServiceTest {
 	
 	@Test
 	public void search() throws Exception {
-		String expectedUrl = UriComponentsBuilder.fromHttpUrl(searchUrl).buildAndExpand(term, ANY.name().toLowerCase(), "", maxResults, apiKey).toString();
+		String expectedUrl = UriComponentsBuilder.fromHttpUrl(searchUrl).buildAndExpand(term, ANY, "", maxResults, apiKey).toString();
 		mockServer.expect(requestTo(expectedUrl)).andRespond(withSuccess(searchResult, APPLICATION_JSON));
 		Result result = service.search(term);
 		mockServer.verify();
@@ -71,7 +71,7 @@ public class VideoServiceTest {
 	
 	@Test
 	public void searchWithVideoDefinition() throws Exception {
-		String expectedUrl = UriComponentsBuilder.fromHttpUrl(searchUrl).buildAndExpand(term, HIGH.name().toLowerCase(), "", maxResults, apiKey).toString();
+		String expectedUrl = UriComponentsBuilder.fromHttpUrl(searchUrl).buildAndExpand(term, HIGH, "", maxResults, apiKey).toString();
 		mockServer.expect(requestTo(expectedUrl)).andRespond(withSuccess(searchResult, APPLICATION_JSON));
 		Result result = service.search(term, HIGH);
 		mockServer.verify();
@@ -84,7 +84,7 @@ public class VideoServiceTest {
     @Test
     public void searchWithVideoDefinitionAndPage() throws Exception {
         String page = randomAlphanumeric(10);
-        String expectedUrl = UriComponentsBuilder.fromHttpUrl(searchUrl).buildAndExpand(term, HIGH.name().toLowerCase(), page, maxResults, apiKey).toString();
+        String expectedUrl = UriComponentsBuilder.fromHttpUrl(searchUrl).buildAndExpand(term, HIGH, page, maxResults, apiKey).toString();
         mockServer.expect(requestTo(expectedUrl)).andRespond(withSuccess(searchResult, APPLICATION_JSON));
         Result result = service.search(term, HIGH, page);
         mockServer.verify();

@@ -4,9 +4,12 @@
 package org.hyness.video.service;
 
 import org.hyness.video.domain.Result;
-import org.hyness.video.domain.VideoDefinition;
 
 public interface VideoService {
+    enum VideoDefinition {
+        ANY, STANDARD, HIGH;
+    }
+    
 	Result search(String term);
 
 	Result search(String term, VideoDefinition videoDefinition);

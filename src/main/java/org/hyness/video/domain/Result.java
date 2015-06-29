@@ -31,7 +31,7 @@ public class Result {
     @Setter
     @ToString
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class PageInfo {
+    private static class PageInfo {
         private int totalResults;
         private int resultsPerPage;
     }
@@ -43,7 +43,7 @@ public class Result {
         @Getter
         private String etag;
         private Id id = new Id();
-        private Snippet snippet;
+        private Snippet snippet = new Snippet();
         
         public String getId() {
             return id.videoId;
@@ -64,14 +64,14 @@ public class Result {
         @Setter
         @ToString
         @JsonIgnoreProperties(ignoreUnknown = true)
-        public static class Id {
+        private static class Id {
             private String videoId;
         }
     }
     
     @Setter
     @ToString
-    public static class Snippet {
+    private static class Snippet {
         private String publishedAt;
         private String title;
         private String description;

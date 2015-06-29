@@ -3,8 +3,8 @@ package org.hyness.video.web;
 import javax.inject.Inject;
 
 import org.hyness.video.domain.Result;
-import org.hyness.video.domain.VideoDefinition;
 import org.hyness.video.service.VideoService;
+import org.hyness.video.service.VideoService.VideoDefinition;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
