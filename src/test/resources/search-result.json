@@ -1,1 +1,283 @@
-{"apiVersion":"2.1","data":{"updated":"2013-07-15T20:58:19.900Z","totalItems":1000000,"startIndex":1,"itemsPerPage":2,"items":[{"id":"OZ9o7owSUcQ","uploaded":"2013-02-12T07:05:12.000Z","updated":"2013-07-15T12:01:48.000Z","uploader":"nba","category":"Sports","title":"Blake Griffin's Top 10 Plays of his Career","description":"Blake Griffin has quickly established himself as one of the best dunkers the game has ever seen. He is a fixture on nightly top 10 playlists & has created co...","thumbnail":{"sqDefault":"https://i.ytimg.com/vi/OZ9o7owSUcQ/default.jpg","hqDefault":"https://i.ytimg.com/vi/OZ9o7owSUcQ/hqdefault.jpg"},"player":{"default":"https://www.youtube.com/watch?v=OZ9o7owSUcQ&feature=youtube_gdata_player","mobile":"https://m.youtube.com/details?v=OZ9o7owSUcQ"},"content":{"5":"https://www.youtube.com/v/OZ9o7owSUcQ?version=3&f=videos&app=youtube_gdata","1":"rtsp://r2---sn-a5m7lne6.c.youtube.com/CiILENy73wIaGQnEURKM7mifORMYDSANFEgGUgZ2aWRlb3MM/0/0/0/video.3gp","6":"rtsp://r2---sn-a5m7lne6.c.youtube.com/CiILENy73wIaGQnEURKM7mifORMYESARFEgGUgZ2aWRlb3MM/0/0/0/video.3gp"},"duration":200,"aspectRatio":"widescreen","rating":4.8262377,"likeCount":"8830","ratingCount":9231,"viewCount":2740656,"favoriteCount":0,"commentCount":2628,"restrictions":[{"type":"country","relationship":"deny","countries":"CN TW"}],"accessControl":{"comment":"allowed","commentVote":"allowed","videoRespond":"moderated","rate":"allowed","embed":"allowed","list":"allowed","autoPlay":"allowed","syndicate":"allowed"}},{"id":"mjE054z4iBw","uploaded":"2012-09-04T19:11:52.000Z","updated":"2013-07-14T23:58:40.000Z","uploader":"theking9098space","category":"Film","title":"Il Meglio Dei Griffin","description":"Le scene che secondo me sono le più divertenti dei Griffin.","thumbnail":{"sqDefault":"https://i.ytimg.com/vi/mjE054z4iBw/default.jpg","hqDefault":"https://i.ytimg.com/vi/mjE054z4iBw/hqdefault.jpg"},"player":{"default":"https://www.youtube.com/watch?v=mjE054z4iBw&feature=youtube_gdata_player","mobile":"https://m.youtube.com/details?v=mjE054z4iBw"},"content":{"5":"https://www.youtube.com/v/mjE054z4iBw?version=3&f=videos&app=youtube_gdata","1":"rtsp://r20---sn-a5m7zne7.c.youtube.com/CiILENy73wIaGQkciPiM5zQxmhMYDSANFEgGUgZ2aWRlb3MM/0/0/0/video.3gp","6":"rtsp://r20---sn-a5m7zne7.c.youtube.com/CiILENy73wIaGQkciPiM5zQxmhMYESARFEgGUgZ2aWRlb3MM/0/0/0/video.3gp"},"duration":641,"rating":4.825299,"likeCount":"2638","ratingCount":2759,"viewCount":563079,"favoriteCount":0,"commentCount":423,"accessControl":{"comment":"allowed","commentVote":"allowed","videoRespond":"moderated","rate":"allowed","embed":"allowed","list":"allowed","autoPlay":"allowed","syndicate":"allowed"}}]}}
+{
+ "kind": "youtube#searchListResponse",
+ "etag": "\"Y3xTLFF3RLtHXX85JBgzzgp2Enw/6976gzew8_sWPX25H7hqX6LIzCk\"",
+ "nextPageToken": "CBQQAA",
+ "prevPageToken": "CAoQAQ",
+ "pageInfo": {
+  "totalResults": 1000000,
+  "resultsPerPage": 10
+ },
+ "items": [
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"Y3xTLFF3RLtHXX85JBgzzgp2Enw/UAaCg76cKcW00Mv1SsCdAXTcCRU\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "PaxG2cTNWkQ"
+   },
+   "snippet": {
+    "publishedAt": "2015-01-06T15:02:38.000Z",
+    "channelId": "UCidyXZhm8OpIO056rFlTH_Q",
+    "title": "Real Life Peter Griffin Goes To NYCC 2014 | BOOM! Big Pants",
+    "description": "Robert Franzese cosplaying as the Real Life Peter Griffin goes to New York Comic Con 2014. Get to know a little more behind the aspiring voice actor and ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/PaxG2cTNWkQ/default.jpg"
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/PaxG2cTNWkQ/mqdefault.jpg"
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/PaxG2cTNWkQ/hqdefault.jpg"
+     }
+    },
+    "channelTitle": "",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"Y3xTLFF3RLtHXX85JBgzzgp2Enw/nMb7ZSHbiptE0jAxJdauJ0sGJ5A\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "B8gPDvjpZxk"
+   },
+   "snippet": {
+    "publishedAt": "2014-08-04T11:54:23.000Z",
+    "channelId": "UCSY45SRc5qKlpQcnqpH5IWQ",
+    "title": "Top 10 Career Dunks: Blake Griffin",
+    "description": "Blake is one of my favorite players, and I love to watch him play and do good on the court. I already made 2014 Blake Griffin mix, so I decided to do something ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/B8gPDvjpZxk/default.jpg"
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/B8gPDvjpZxk/mqdefault.jpg"
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/B8gPDvjpZxk/hqdefault.jpg"
+     }
+    },
+    "channelTitle": "96golic",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"Y3xTLFF3RLtHXX85JBgzzgp2Enw/jX3FlSCjrMTdu58ZQdYKlwj_0bM\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "o_u12sFIYHY"
+   },
+   "snippet": {
+    "publishedAt": "2015-04-14T13:37:04.000Z",
+    "channelId": "UC3xeW5LLxLzozW3c6v-9QzA",
+    "title": "Kathy Griffin Stand Up - Kathy Griffin: Allegedly Full Show - Stand up Comedy Full Show",
+    "description": "Kathy Griffin's all new feature-length stand-up DVD featuring the D-List Diva herself destroying the A-list stars we know and love. Director: Keith Truesdell Writer: ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/o_u12sFIYHY/default.jpg"
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/o_u12sFIYHY/mqdefault.jpg"
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/o_u12sFIYHY/hqdefault.jpg"
+     }
+    },
+    "channelTitle": "",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"Y3xTLFF3RLtHXX85JBgzzgp2Enw/30-kAvqkXGx-T3cWhumfHBbmRHU\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "be5AvybhDu4"
+   },
+   "snippet": {
+    "publishedAt": "2014-11-01T07:38:33.000Z",
+    "channelId": "UC7zHLmbmASW9zmLW8WpFm1g",
+    "title": "Blake Griffin Full Highlights at Lakers (2014.10.31) - 39 Pts, 7 Reb, Sick!",
+    "description": "BUY NOW BoingVERT for smart athletes! 50% OFF http://goo.gl/RdgL83 Download EVERY NBA game in HD! http://goo.gl/FJU58O Like, Comment, Share ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/be5AvybhDu4/default.jpg"
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/be5AvybhDu4/mqdefault.jpg"
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/be5AvybhDu4/hqdefault.jpg"
+     }
+    },
+    "channelTitle": "gdfactoryclips",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"Y3xTLFF3RLtHXX85JBgzzgp2Enw/ORvI_1TCPdMGGY3FakptkEVbQ2g\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "9uL-mfGPMYo"
+   },
+   "snippet": {
+    "publishedAt": "2015-06-09T15:12:37.000Z",
+    "channelId": "UCIDA0zB3XQHTLCcb7c5cNNw",
+    "title": "Blake Griffin - Best Dunks Compilation | 2014-15 NBA Season",
+    "description": "Check out Blake Griffin's best dunks from 2014-15 NBA Season. Courtesy: NBA.com Like Us on Facebook: https://goo.gl/vwi9Zf Follow Us on Twitter: ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/9uL-mfGPMYo/default.jpg"
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/9uL-mfGPMYo/mqdefault.jpg"
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/9uL-mfGPMYo/hqdefault.jpg"
+     }
+    },
+    "channelTitle": "",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"Y3xTLFF3RLtHXX85JBgzzgp2Enw/Th62kjcinHnQU6mWhZtT3pjoAzg\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "NxnWv1n2ANQ"
+   },
+   "snippet": {
+    "publishedAt": "2015-06-25T21:00:00.000Z",
+    "channelId": "UC6ZmloCw8ODRo-lWAwX6Nig",
+    "title": "3 MASCARA TRIALS | Griffin Arnlund",
+    "description": "With mascara, you never know which one to get, but I am here to help! ♡ OPEN THIS FOR MORE FROM ME ♡ TWITTER: http://twitter.com/Griffinarnlund ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/NxnWv1n2ANQ/default.jpg"
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/NxnWv1n2ANQ/mqdefault.jpg"
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/NxnWv1n2ANQ/hqdefault.jpg"
+     }
+    },
+    "channelTitle": "GriffinArnlund",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"Y3xTLFF3RLtHXX85JBgzzgp2Enw/lfIVjLvfmnbhU-TL8vfHmPgOOuU\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "ykVXKPiBvDo"
+   },
+   "snippet": {
+    "publishedAt": "2015-06-28T21:00:01.000Z",
+    "channelId": "UC6ZmloCw8ODRo-lWAwX6Nig",
+    "title": "5 THINGS CHALLENGE | Griffin Arnlund",
+    "description": "I had so much fun filming this 5 Things Challenge with the amazing Natalie-Tasha. I hope you enjoy it! ♡ OPEN THIS FOR MORE FROM ME ♡ Make sure to ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/ykVXKPiBvDo/default.jpg"
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/ykVXKPiBvDo/mqdefault.jpg"
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/ykVXKPiBvDo/hqdefault.jpg"
+     }
+    },
+    "channelTitle": "GriffinArnlund",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"Y3xTLFF3RLtHXX85JBgzzgp2Enw/jxWW8CV1OdlfXmZzZp46F4YycTE\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "idnICrEhNsI"
+   },
+   "snippet": {
+    "publishedAt": "2015-04-20T05:28:29.000Z",
+    "channelId": "UCWJ2lWNubArHWmf3FIHbfcQ",
+    "title": "Blake Griffin's Trio of Epic Posterizing Dunks",
+    "description": "Blake Griffin makes three amazing smashes on Aron Baynes in the third quarter of game against the Spurs. About the NBA: The NBA is the premier professional ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/idnICrEhNsI/default.jpg"
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/idnICrEhNsI/mqdefault.jpg"
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/idnICrEhNsI/hqdefault.jpg"
+     }
+    },
+    "channelTitle": "NBA",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"Y3xTLFF3RLtHXX85JBgzzgp2Enw/lVYFf941oQO06VJyQUUZA4OKuiw\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "6gG4W0L41FI"
+   },
+   "snippet": {
+    "publishedAt": "2010-11-30T22:41:58.000Z",
+    "channelId": "UCWJ2lWNubArHWmf3FIHbfcQ",
+    "title": "Blake Griffin's Top 10 Dunks of Nov.",
+    "description": "Check out Blake Griffin's top 10 dunks from the season thus far.",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/6gG4W0L41FI/default.jpg"
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/6gG4W0L41FI/mqdefault.jpg"
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/6gG4W0L41FI/hqdefault.jpg"
+     }
+    },
+    "channelTitle": "NBA",
+    "liveBroadcastContent": "none"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "\"Y3xTLFF3RLtHXX85JBgzzgp2Enw/0inm2kly7A3LQ1lz8PcpaO2LjHI\"",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "7MYD9bXQ3Yw"
+   },
+   "snippet": {
+    "publishedAt": "2015-05-05T06:03:54.000Z",
+    "channelId": "UCEjOSbbaOfgnfRODEEMYlCw",
+    "title": "Blake Griffin Full Triple-Double Highlights 2015 WCSF G1 at Rockets - 26 Pts, 14 Rebs, 13 Dimes!",
+    "description": "Sign a Petition to Bring Back Main Channel \"Dawk Ins\" - https://www.change.org/p/nba-com-restore-the-dawk-ins-youtube-channel Got a Request? Wonder what ...",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/7MYD9bXQ3Yw/default.jpg"
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/7MYD9bXQ3Yw/mqdefault.jpg"
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/7MYD9bXQ3Yw/hqdefault.jpg"
+     }
+    },
+    "channelTitle": "",
+    "liveBroadcastContent": "none"
+   }
+  }
+ ]
+}
+

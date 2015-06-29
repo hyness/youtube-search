@@ -1,14 +1,79 @@
 package org.hyness.video.domain;
 
 import static lombok.AccessLevel.NONE;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter(NONE)
-@ToString
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Result {
-	private String apiVersion;
-	private Data data;
+    private String etag;
+    private String prevPageToken;
+    private String nextPageToken;
+    @Getter(NONE) private PageInfo pageInfo = new PageInfo();
+    private List<Item> items;
+    
+    public int getTotalResults() {
+        return pageInfo.totalResults;
+    }
+    
+    public int getResultsPerPage() {
+        return pageInfo.resultsPerPage;
+    }
+
+    @Setter
+    @ToString
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class PageInfo {
+        private int totalResults;
+        private int resultsPerPage;
+    }
+
+    @Setter
+    @ToString
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Item {
+        @Getter
+        private String etag;
+        private Id id = new Id();
+        private Snippet snippet;
+        
+        public String getId() {
+            return id.videoId;
+        }
+        
+        public String getPublishedAt() {
+            return snippet.publishedAt;
+        }
+
+        public String getTitle() {
+            return snippet.title;
+        }
+
+        public String getDescription() {
+            return snippet.description;
+        }
+
+        @Setter
+        @ToString
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        public static class Id {
+            private String videoId;
+        }
+    }
+    
+    @Setter
+    @ToString
+    public static class Snippet {
+        private String publishedAt;
+        private String title;
+        private String description;
+    }
 }

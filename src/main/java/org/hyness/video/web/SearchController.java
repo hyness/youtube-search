@@ -3,6 +3,7 @@ package org.hyness.video.web;
 import javax.inject.Inject;
 
 import org.hyness.video.domain.Result;
+import org.hyness.video.domain.VideoDefinition;
 import org.hyness.video.service.VideoService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +19,14 @@ public class SearchController {
 	public Result search(@PathVariable String term) {
 		return service.search(term);
 	}
+    
+    @RequestMapping(value = "/search/{term}/{videoDefinition}", method = RequestMethod.GET)
+    public Result searchPage(@PathVariable String term, @PathVariable VideoDefinition videoDefinition) {
+        return service.search(term, videoDefinition);
+    }
 	
-	@RequestMapping(value = "/search/{term}/{hd}/{page}", method = RequestMethod.GET)
-	public Result searchPage(@PathVariable String term, @PathVariable boolean hd, @PathVariable int page) {
-		return service.search(term, hd, page);
+	@RequestMapping(value = "/search/{term}/{videoDefinition}/{pageToken}", method = RequestMethod.GET)
+	public Result searchPage(@PathVariable String term, @PathVariable VideoDefinition videoDefinition, @PathVariable String pageToken) {
+		return service.search(term, videoDefinition, pageToken);
 	}
 }

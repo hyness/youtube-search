@@ -19,28 +19,29 @@ function showVideo(id, title) {
 	player.dialog("open");
 }
 
-function executeSearch(query, hd, page) {
+function executeSearch(query, hd, page, token) {
 	$.ajax({
 		type: "GET",
-		url: "search/" + query + "/" + hd + "/" + page,
+		url: "search/" + query + "/" + hd + (token != null ? "/" + token : ""),
 	}).done(function(msg) {
 		var response = $("#results").empty();
 		
-		if (msg.data.totalItems != 0) {
-			var itemsPerPage = msg.data.itemsPerPage;
-			var totalItems = msg.data.totalItems;
-			var prevPage = parseInt(page) - 1;
-			var nextPage = parseInt(page) + 1;
-			var startIndex = msg.data.startIndex;
+		if (msg.totalResults != 0) {
+			page = parseInt(page);
+			var itemsPerPage = msg.resultsPerPage;
+			var totalItems = msg.totalResults;
+			var prevPage = msg.prevPageToken;
+			var nextPage = msg.nextPageToken;
+			var startIndex = ((page - 1) * itemsPerPage) + 1;
 			var endIndex = page * itemsPerPage < totalItems ? page * itemsPerPage : totalItems;
-			var prevLink = prevPage > 0 ? $('<a class="page" href="#">prev</a>').attr('id', prevPage) : 'prev';
-			var nextLink = endIndex < totalItems ? $('<a class="page" href="#">next</a>').attr('id', nextPage) : 'next';
+			var prevLink = prevPage != null ? $('<a class="page" href="#">prev</a>').attr('pageNo', page - 1).attr('id', prevPage) : 'prev';
+			var nextLink = nextPage != null ? $('<a class="page" href="#">next</a>').attr('pageNo', page + 1).attr('id', nextPage) : 'next';
 			var nav = $('<span class="nav"></span>').append(prevLink).append(' | ').append(nextLink);
 			
 			response.append($('<span></span>').append('Showing ' + startIndex + '-' + endIndex + ' of ' + totalItems + ' videos'))
 				.append(nav.clone());
 			var links = $('<ol></ol>').attr('start', startIndex);
-			$(msg.data.items).each(function(){
+			$(msg.items).each(function(){
 				links.append($('<li></li>').append(
 					$('<a class="dynamiclink" href="#"></a>').attr('id', this.id).html(this.title)
 				));
@@ -58,13 +59,13 @@ $(document).on("click", "a.dynamiclink", function(event){
 	showVideo(this.id, $(this).html());
 	event.preventDefault();
 }).on("click", "a.page", function(event){
-	executeSearch($("#term").val(), $("#hd").prop('checked'), this.id);
+	executeSearch($("#term").val(), $("#hd").prop('checked') ? 'HIGH' : 'ANY', $(this).attr("pageno"), this.id);
 	event.preventDefault();
 });
 
 $(document).ready(function(){
 	$("#search").click(function(){
-		executeSearch($("#term").val(), $("#hd").prop('checked'), 1);
+		executeSearch($("#term").val(), $("#hd").prop('checked') ? 'HIGH' : 'ANY', 1, '');
 	});
 
 	$("#loader").ajaxStart(function(){
@@ -75,7 +76,7 @@ $(document).ready(function(){
 	
 	$("#term").keypress(function(event){
 		if (event.keyCode == 13) {
-			executeSearch($("#term").val(), $("#hd").prop('checked'), 1);
+			executeSearch($("#term").val(), $("#hd").prop('checked') ? 'HIGH' : 'ANY', 1, '');
 		}
 	}).focus();
 	

@@ -1,0 +1,17 @@
+# Spring properties
+management:
+    contextPath: /manage
+    
+security:
+    ignored:
+        - /*
+        - /styles/**
+        - /js/**
+        - /img/**
+        - /search/**
+    user:
+        name: myuser
+        password: p@ssw0rd
+
+video-service:
+    search-url: https://www.googleapis.com/youtube/v3/search?q={term}&type=video&videoDefinition={videoDefinition}&pageToken={pageToken}&maxResults={maxResults}&key={apiKey}&part=snippet

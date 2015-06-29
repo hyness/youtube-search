@@ -1,10 +1,12 @@
 package org.hyness.video.service;
 
-import static com.google.common.base.Charsets.UTF_8;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hyness.video.domain.VideoDefinition.ANY;
+import static org.hyness.video.domain.VideoDefinition.HIGH;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.util.ReflectionTestUtils.setField;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
@@ -13,26 +15,31 @@ import java.io.IOException;
 import org.hyness.video.domain.Result;
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.google.common.io.Resources;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RunWith(MockitoJUnitRunner.class)
 public class VideoServiceTest {
-	private Logger logger = LoggerFactory.getLogger(getClass());
-	
+    @InjectMocks
 	private VideoServiceRestImpl service;
 	
 	private RestTemplate template = new RestTemplate();
 	
 	private int maxResults = 10;
 	
-	private String searchUrl = "http://localhost/search?q={query}&start-index={startIndex}&max-results={maxResults}";
+	private String searchUrl = "https://www.googleapis.com/youtube/v3/search?q={term}&type=video&videoDefinition={videoDefinition}"
+	        + "&pageToken={pageToken}&maxResults={maxResults}&key={apiKey}&part=snippet";
 	
-	private String popularUrl = "http://localhost/popular?start-index={startIndex}&max-results={maxResults}";
+	private String apiKey = randomAlphanumeric(20);
 	
 	private MockRestServiceServer mockServer;
 
@@ -42,72 +49,48 @@ public class VideoServiceTest {
 	
 	@Before
 	public void init() throws IOException {
-		service = new VideoServiceRestImpl();
 		mockServer = MockRestServiceServer.createServer(template);
-		setField(service, "template", template);
+		service.setTemplate(template);
 		service.setMaxResults(maxResults);
 		service.setSearchUrl(searchUrl);
-		service.setPopularUrl(popularUrl);
+		service.setApiKey(apiKey);
 		searchResult = Resources.toString(Resources.getResource("search-result.json"), UTF_8);
 	}
 	
 	@Test
 	public void search() throws Exception {
-		String expectedUrl = UriComponentsBuilder.fromHttpUrl(searchUrl).buildAndExpand(term, 1, maxResults).toString();
+		String expectedUrl = UriComponentsBuilder.fromHttpUrl(searchUrl).buildAndExpand(term, ANY.name().toLowerCase(), "", maxResults, apiKey).toString();
 		mockServer.expect(requestTo(expectedUrl)).andRespond(withSuccess(searchResult, APPLICATION_JSON));
 		Result result = service.search(term);
 		mockServer.verify();
 		
-		logger.debug("result: {}", result);
+		log.debug("result: {}", result);
 		assertThat(result).isNotNull();
-		assertThat(result.getData()).isNotNull();
+		assertThat(result.getItems()).isNotNull().hasSize(10);
 	}
 	
 	@Test
-	public void searchWithPage() throws Exception {
-		String expectedUrl = UriComponentsBuilder.fromHttpUrl(searchUrl).buildAndExpand(term, 41, maxResults).toString();
+	public void searchWithVideoDefinition() throws Exception {
+		String expectedUrl = UriComponentsBuilder.fromHttpUrl(searchUrl).buildAndExpand(term, HIGH.name().toLowerCase(), "", maxResults, apiKey).toString();
 		mockServer.expect(requestTo(expectedUrl)).andRespond(withSuccess(searchResult, APPLICATION_JSON));
-		Result result = service.search(term, 5);
+		Result result = service.search(term, HIGH);
 		mockServer.verify();
 		
-		logger.debug("result: {}", result);
+		log.debug("result: {}", result);
 		assertThat(result).isNotNull();
-		assertThat(result.getData()).isNotNull();
+        assertThat(result.getItems()).isNotNull().hasSize(10);
 	}
-	
-	@Test
-	public void searchWithPageAndHd() throws Exception {
-		String expectedUrl = UriComponentsBuilder.fromHttpUrl(searchUrl).buildAndExpand(term, 41, maxResults).toString();
-		mockServer.expect(requestTo(expectedUrl + "&hd=true")).andRespond(withSuccess(searchResult, APPLICATION_JSON));
-		Result result = service.search(term, true, 5);
-		mockServer.verify();
-		
-		logger.debug("result: {}", result);
-		assertThat(result).isNotNull();
-		assertThat(result.getData()).isNotNull();
-	}
-	
-	@Test
-	public void popular() throws Exception {
-		String expectedUrl = UriComponentsBuilder.fromHttpUrl(popularUrl).buildAndExpand(1, maxResults).toString();
-		mockServer.expect(requestTo(expectedUrl)).andRespond(withSuccess(searchResult, APPLICATION_JSON));
-		Result result = service.getMostPopular();
-		mockServer.verify();
-		
-		logger.debug("result: {}", result);
-		assertThat(result).isNotNull();
-		assertThat(result.getData()).isNotNull();
-	}
-	
-	@Test
-	public void popularWithPage() throws Exception {
-		String expectedUrl = UriComponentsBuilder.fromHttpUrl(popularUrl).buildAndExpand(41, maxResults).toString();
-		mockServer.expect(requestTo(expectedUrl)).andRespond(withSuccess(searchResult, APPLICATION_JSON));
-		Result result = service.getMostPopular(5);
-		mockServer.verify();
-		
-		logger.debug("result: {}", result);
-		assertThat(result).isNotNull();
-		assertThat(result.getData()).isNotNull();
-	}
+    
+    @Test
+    public void searchWithVideoDefinitionAndPage() throws Exception {
+        String page = randomAlphanumeric(10);
+        String expectedUrl = UriComponentsBuilder.fromHttpUrl(searchUrl).buildAndExpand(term, HIGH.name().toLowerCase(), page, maxResults, apiKey).toString();
+        mockServer.expect(requestTo(expectedUrl)).andRespond(withSuccess(searchResult, APPLICATION_JSON));
+        Result result = service.search(term, HIGH, page);
+        mockServer.verify();
+        
+        log.debug("result: {}", result);
+        assertThat(result).isNotNull();
+        assertThat(result.getItems()).isNotNull().hasSize(10);
+    }
 }
