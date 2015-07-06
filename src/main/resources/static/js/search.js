@@ -9,7 +9,7 @@ function showVideo(id, title) {
 	var player = $("<div></div>");
 	$("body").append(player);
 	player.dialog({
-		autoOpen: false, modal: true, resizable: false, position: 'center',  
+		autoOpen: false, modal: true, resizable: false, position: {my: 'center'},  
 		width: 'auto', height: 'auto', title: title, 
 		close: function(){
 			player.remove();		
@@ -19,26 +19,24 @@ function showVideo(id, title) {
 	player.dialog("open");
 }
 
-function executeSearch(query, hd, page, token) {
+function executeSearch(page, token) {
 	$.ajax({
 		type: "GET",
-		url: "search/" + query + "/" + hd + (token != null ? "/" + token : ""),
+		url: "search/" + $("#term").val() + "/" 
+			+ ($("#hd").prop('checked') ? 'HIGH' : 'ANY') 
+			+ (typeof token !== 'undefined' ? '/' + token : '')
 	}).done(function(msg) {
 		var response = $("#results").empty();
 		
 		if (msg.totalResults != 0) {
-			page = parseInt(page);
-			var itemsPerPage = msg.resultsPerPage;
-			var totalItems = msg.totalResults;
-			var prevPage = msg.prevPageToken;
-			var nextPage = msg.nextPageToken;
-			var startIndex = ((page - 1) * itemsPerPage) + 1;
-			var endIndex = page * itemsPerPage < totalItems ? page * itemsPerPage : totalItems;
-			var prevLink = prevPage != null ? $('<a class="page" href="#">prev</a>').attr('pageNo', page - 1).attr('id', prevPage) : 'prev';
-			var nextLink = nextPage != null ? $('<a class="page" href="#">next</a>').attr('pageNo', page + 1).attr('id', nextPage) : 'next';
+			page = typeof page !== 'undefined' ?  parseInt(page) : 1;
+			var startIndex = ((page - 1) * msg.resultsPerPage) + 1;
+			var endIndex = Math.min(page * msg.resultsPerPage, msg.totalResults);
+			var prevLink = msg.prevPageToken != null ? $('<a class="page" href="#">prev</a>').attr('pageNo', page - 1).attr('id', msg.prevPageToken) : 'prev';
+			var nextLink = msg.nextPageToken != null ? $('<a class="page" href="#">next</a>').attr('pageNo', page + 1).attr('id', msg.nextPageToken) : 'next';
 			var nav = $('<span class="nav"></span>').append(prevLink).append(' | ').append(nextLink);
 			
-			response.append($('<span></span>').append('Showing ' + startIndex + '-' + endIndex + ' of ' + totalItems + ' videos'))
+			response.append($('<span></span>').append('Showing ' + startIndex + '-' + endIndex + ' of ' + msg.totalResults + ' videos'))
 				.append(nav.clone());
 			var links = $('<ol></ol>').attr('start', startIndex);
 			$(msg.items).each(function(){
@@ -59,13 +57,13 @@ $(document).on("click", "a.dynamiclink", function(event){
 	showVideo(this.id, $(this).html());
 	event.preventDefault();
 }).on("click", "a.page", function(event){
-	executeSearch($("#term").val(), $("#hd").prop('checked') ? 'HIGH' : 'ANY', $(this).attr("pageno"), this.id);
+	executeSearch($(this).attr("pageno"), this.id);
 	event.preventDefault();
 });
 
 $(document).ready(function(){
 	$("#search").click(function(){
-		executeSearch($("#term").val(), $("#hd").prop('checked') ? 'HIGH' : 'ANY', 1, '');
+		executeSearch();
 	});
 
 	$("#loader").ajaxStart(function(){
@@ -76,7 +74,7 @@ $(document).ready(function(){
 	
 	$("#term").keypress(function(event){
 		if (event.keyCode == 13) {
-			executeSearch($("#term").val(), $("#hd").prop('checked') ? 'HIGH' : 'ANY', 1, '');
+			executeSearch();
 		}
 	}).focus();
 	

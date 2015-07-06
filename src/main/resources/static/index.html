@@ -1,23 +1,30 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Video Search</title>
-        <link type="text/css" href="styles/search.css" rel="stylesheet" />
-        <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/redmond/jquery-ui.css" rel="stylesheet" />
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-        <script src="js/search.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/redmond/jquery-ui.css">
+        <link rel="stylesheet" href="styles/search.css">
     </head>
     <body>
-        <section id="searchForm">
-            <label for="term">Search for videos:</label>
-            <input type="text" id="term" />    
-            <input type="checkbox" id="hd" name="hd" /> HD
-            <input type="submit" id="search" value="search" />
-            <img id="loader" alt="loader" src="img/ajax-loader.gif" />
-        </section>
+        <div id="searchForm" class="container-fluid">
+            <h4>Video Search</h4>
+            <input id="term" type="text" placeholder="Search for videos">
+            <input id="hd" type="checkbox"> HD
+            <button id="search" type="button" class="btn btn-sm btn-xs">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </button>
+            <img id="loader" alt="loader" src="img/ajax-loader.gif">
+        </div>
     
-        <section id="results"></section>
+        <div id="results" class="container-fluid"></div>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+        <script src="js/search.js"></script>
     </body>
 </html>
