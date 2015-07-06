@@ -25,4 +25,4 @@ spring:
   profiles: prod
 
 management:
-    contextPath: /manage
+    context-path: /manage

@@ -7,12 +7,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hyness.video.service.VideoService.VideoDefinition.ANY;
 import static org.hyness.video.service.VideoService.VideoDefinition.HIGH;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.util.ReflectionTestUtils.setField;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 import java.io.IOException;
 
 import org.hyness.video.domain.Result;
+import org.hyness.video.service.VideoService.VideoServiceProperties;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,10 +52,13 @@ public class VideoServiceTest {
 	@Before
 	public void init() throws IOException {
 		mockServer = MockRestServiceServer.createServer(template);
-		service.setTemplate(template);
-		service.setMaxResults(maxResults);
-		service.setSearchUrl(searchUrl);
-		service.setApiKey(apiKey);
+		setField(service, "template", template);
+		
+		VideoServiceProperties properties = new VideoServiceProperties();
+        properties.setMaxResults(maxResults);
+		properties.setSearchUrl(searchUrl);
+		properties.setApiKey(apiKey);
+        setField(service, "properties", properties);
 		searchResult = Resources.toString(Resources.getResource("search-result.json"), UTF_8);
 	}
 	
