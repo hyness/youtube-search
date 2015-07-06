@@ -1,5 +1,5 @@
 video-service:
-    search-url: https://www.googleapis.com/youtube/v3/search?q={term}&type=video&videoDefinition={videoDefinition}&pageToken={pageToken}&maxResults={maxResults}&key={apiKey}&part=snippet
+    search-url: https://www.googleapis.com/youtube/v3/search?q={term}&type=video&videoDefinition={videoDefinition}&pageToken={pageToken}&maxResults={maxResults}&key={apiKey}&part=snippet&relevanceLanguage=en
 
 security:
     ignored:
@@ -10,7 +10,7 @@ security:
         - /search/**
 ---
 spring:
-  profiles: "!prod"
+  profiles: dev
 
 security:
   basic:

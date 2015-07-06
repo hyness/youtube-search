@@ -2,6 +2,7 @@ package org.hyness.video.domain;
 
 import static lombok.AccessLevel.NONE;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -49,7 +50,7 @@ public class Result {
             return id.videoId;
         }
         
-        public String getPublishedAt() {
+        public ZonedDateTime getPublishedAt() {
             return snippet.publishedAt;
         }
 
@@ -72,7 +73,7 @@ public class Result {
     @Setter
     @ToString
     private static class Snippet {
-        private String publishedAt;
+        private ZonedDateTime publishedAt;
         private String title;
         private String description;
     }
