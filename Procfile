@@ -1,1 +1,1 @@
-web:    java $JAVA_OPTS -jar target/youtube-api-*.jar --server.port=$PORT
+web:    java $JAVA_OPTS -jar target/youtube-search-*.jar --server.port=$PORT
