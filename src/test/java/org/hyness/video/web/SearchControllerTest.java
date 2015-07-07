@@ -1,6 +1,6 @@
 package org.hyness.video.web;
 
-import static org.hyness.video.service.VideoService.VideoDefinition.HIGH;
+import static org.hyness.video.service.YouTubeService.VideoDefinition.HIGH;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -8,8 +8,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 import org.hyness.video.domain.Result;
-import org.hyness.video.service.VideoService;
-import org.hyness.video.service.VideoService.VideoDefinition;
+import org.hyness.video.service.YouTubeService;
+import org.hyness.video.service.YouTubeService.VideoDefinition;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -28,7 +28,7 @@ public class SearchControllerTest {
 	private SearchController controller;
 	
 	@Mock
-	private VideoService service;
+	private YouTubeService service;
 
 	private Result result = new Result();
 	

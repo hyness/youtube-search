@@ -1,6 +1,6 @@
 package org.hyness.video;
 
-import org.hyness.video.service.VideoService.VideoServiceProperties;
+import org.hyness.video.service.YouTubeService.YouTubeProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-@EnableConfigurationProperties(VideoServiceProperties.class)
+@EnableConfigurationProperties(YouTubeProperties.class)
 public class YouTubeApplication implements EmbeddedServletContainerCustomizer {
 	public static void main(String[] args) {
 		SpringApplication.run(YouTubeApplication.class, args);

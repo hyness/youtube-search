@@ -4,8 +4,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hyness.video.service.VideoService.VideoDefinition.ANY;
-import static org.hyness.video.service.VideoService.VideoDefinition.HIGH;
+import static org.hyness.video.service.YouTubeService.VideoDefinition.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.util.ReflectionTestUtils.setField;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -14,7 +13,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 import java.io.IOException;
 
 import org.hyness.video.domain.Result;
-import org.hyness.video.service.VideoService.VideoServiceProperties;
+import org.hyness.video.service.YouTubeService.YouTubeProperties;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,9 +29,9 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RunWith(MockitoJUnitRunner.class)
-public class VideoServiceTest {
+public class YouTubeVideoServiceTest {
     @InjectMocks
-	private VideoServiceRestImpl service;
+	private YouTubeService service;
 	
 	private RestTemplate template = new RestTemplate();
 	
@@ -54,7 +53,7 @@ public class VideoServiceTest {
 		mockServer = MockRestServiceServer.createServer(template);
 		setField(service, "template", template);
 		
-		VideoServiceProperties properties = new VideoServiceProperties();
+		YouTubeProperties properties = new YouTubeProperties();
         properties.setMaxResults(maxResults);
 		properties.setSearchUrl(searchUrl);
 		properties.setApiKey(apiKey);
