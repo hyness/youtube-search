@@ -1,25 +1,7 @@
-body {
-	background: #fff;
-	font: normal 12px/1.6em arial, helvetica, sans-serif;
-    font-weight: bold;
-}
-label {
-	display: block;
-}
 a {
 	color: #0f3a8a;
-	text-decoration: none;
 }
 a:hover {
     color: #ff0000;
-}
-ol {
-	width: 100%;
-	margin: 0px;
-}
-.nav{
-	display: block;
-}
-#results {
-	margin-top: 10px;
+    text-decoration: none;
 }
