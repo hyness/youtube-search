@@ -59,18 +59,16 @@ $(document).on("click", "a.dynamiclink", function(event){
 }).on("click", "a.page", function(event){
 	executeSearch($(this).attr("pageno"), this.id);
 	event.preventDefault();
-});
-
-$(document).ready(function(){
+}).ajaxStart(function(){
+	$("#loader").show();
+}).ajaxStop(function(){
+	$("#loader").hide();
+}).ready(function(){
 	$("#search").click(function(){
 		executeSearch();
 	});
 
-	$("#loader").ajaxStart(function(){
-		$(this).show();
-	}).ajaxStop(function(){
-		$(this).hide();
-	}).hide();
+	$("#loader").hide();
 	
 	$("#term").keypress(function(event){
 		if (event.keyCode == 13) {
