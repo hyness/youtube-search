@@ -1,5 +1,11 @@
-FROM dockerfile/java:oracle-java8
-ADD target/youtube-api-*.jar /opt/youtube-api/
+FROM maven:latest
+MAINTAINER hyness <hyness@gmail.com>
+
 EXPOSE 8080
-WORKDIR /opt/youtube-api/
-CMD java -Djava.security.egd=file:/dev/urandom -jar youtube-api-*.jar 
+VOLUME /config
+
+COPY . /usr/src/youtube-search/
+WORKDIR /usr/src/youtube-search/
+RUN mvn package && mkdir /opt/youtube-search && mv target/youtube-search-*.jar /opt/youtube-search
+WORKDIR /
+CMD java -Djava.security.egd=file:/dev/urandom -jar /opt/youtube-search/youtube-search-*.jar 
