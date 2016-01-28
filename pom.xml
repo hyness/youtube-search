@@ -11,6 +11,7 @@
 	</parent>
 	<properties>
 		<java.version>1.8</java.version>
+		<start-class>org.hyness.video.YouTubeApplication</start-class>
 	</properties>
 	<build>
 		<plugins>
