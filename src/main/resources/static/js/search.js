@@ -1,5 +1,5 @@
 function getPlayer(id, width, height) {
-    var url = "http://www.youtube.com/embed/" + id + "?rel=0&autohide=1&autoplay=1&controls=1&fs=1";
+    var url = "//www.youtube.com/embed/" + id + "?rel=0&autohide=1&autoplay=1&controls=1&fs=1";
     return '<iframe title="YouTube video player" style="margin:0; padding:0;" width="' + width + '" ' + 
     	'height="' + height + '" src="' + url + '" frameborder="0" allowfullscreen></iframe>';
 }
