@@ -3,3 +3,7 @@ jdk:
   - oraclejdk8
 after_success:
   - mvn -DserviceJobId=$TRAVIS_JOB_ID jacoco:report coveralls:report
+deploy:
+  provider: heroku
+  api_key: $HEROKU_AUTH_TOKEN
+  app: hyness-video-search
