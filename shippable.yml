@@ -1,0 +1,7 @@
+language: java
+jdk:
+  - oraclejdk8
+build:
+  ci:
+    - mvn install
+    - cp target/site/jacoco/jacoco.xml shippable/codecoverage
