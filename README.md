@@ -2,6 +2,7 @@
 [Spring Boot](http://projects.spring.io/spring-boot/) / [jQuery](https://jquery.com/) / [Bootstrap](https://getbootstrap.com/) app for searching for YouTube videos with the v3 api
 
 [![Travis branch](https://img.shields.io/travis/hyness/youtube-search/develop.svg?style=flat-square)](https://travis-ci.org/hyness/youtube-search)
+[![Coverage Status](https://coveralls.io/repos/github/hyness/youtube-search/badge.svg?branch=develop)](https://coveralls.io/github/hyness/youtube-search?branch=develop)
 
 ### Prerequisites
 * [A free YouTube v3 API key](https://developers.google.com/youtube/registering_an_application#Create_API_Keys)
