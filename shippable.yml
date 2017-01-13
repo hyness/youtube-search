@@ -2,6 +2,8 @@ language: java
 jdk:
   - oraclejdk8
 build:
+  advancedReporting: true
   ci:
-    - mvn install
-    - cp target/site/jacoco/jacoco.xml shippable/codecoverage
+    - mkdir -p shippable/codecoverage
+    - mvn install jacoco:report
+    - cp -r target shippable/codecoverage
