@@ -1,22 +1,15 @@
-function getPlayer(id, width, height) {
-    var url = "//www.youtube.com/embed/" + id + "?rel=0&autohide=1&autoplay=1&controls=1&fs=1";
-    return '<iframe title="YouTube video player" style="margin:0; padding:0;" width="' + width + '" ' + 
-    	'height="' + height + '" src="' + url + '" frameborder="0" allowfullscreen></iframe>';
+function getPlayer(id) {
+    var url = "//www.youtube.com/embed/" + id + "?rel=0&autoplay=1";
+    return '<iframe class="embed-responsive-item" src="' + url + '" ' +
+    	'webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
 }
 
 function showVideo(id, title) {
-	var width = 640, height = 360;
-	var player = $("<div></div>");
-	$("body").append(player);
-	player.dialog({
-		autoOpen: false, modal: true, resizable: false, position: {my: 'center'},  
-		width: 'auto', height: 'auto', title: title, 
-		close: function(){
-			player.remove();		
-		}
+	$('#mediaModal .embed-responsive').html(getPlayer(id));
+	$('#mediaModal').modal();
+	$('#mediaModal').on('hidden.bs.modal', function () {
+		$('#mediaModal .embed-responsive').html('');
 	});
-	player.append(getPlayer(id, width, height));
-	player.dialog("open");
 }
 
 function executeSearch(page, token) {

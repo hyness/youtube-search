@@ -5,13 +5,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Video Search</title>
-        <link rel="stylesheet" href="webjars/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" href="webjars/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="webjars/jquery-ui/1.11.4/jquery-ui.css">
+        <link rel="stylesheet" href="webjars/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="webjars/bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="styles/search.css">
-        <script src="webjars/jquery/1.11.3/jquery.js" defer="defer"></script>
-        <script src="webjars/jquery-ui/1.11.4/jquery-ui.min.js" defer="defer"></script>
-        <script src="webjars/bootstrap/3.3.5/js/bootstrap.min.js" defer="defer"></script>
+        <script src="webjars/jquery/jquery.js" defer="defer"></script>
+        <script src="webjars/bootstrap/js/bootstrap.min.js" defer="defer"></script>
         <script src="js/search.js" defer="defer"></script>
     </head>
     <body>
@@ -26,5 +24,24 @@
         </div>
     
         <div id="results" class="container-fluid"></div>
+
+		<!-- bootstrap modal -->
+		<div class="modal fade" id="mediaModal" tabindex="-1" data-keyboard="true" role="dialog">
+		    <div class="modal-dialog" role="document">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                    <span aria-hidden="true">&times;</span>
+		                </button>
+		            </div>
+		            <div class="modal-body">
+		                <div class="modal-video">
+		                    <div class="embed-responsive embed-responsive-16by9">
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
     </body>
 </html>
