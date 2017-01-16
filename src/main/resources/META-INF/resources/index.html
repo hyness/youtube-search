@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Video Search</title>
+        <link rel="stylesheet" href="webjars/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="webjars/bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="styles/search.css">
+        <script src="webjars/jquery/jquery.js" defer="defer"></script>
+        <script src="webjars/bootstrap/js/bootstrap.min.js" defer="defer"></script>
+        <script src="js/search.js" defer="defer"></script>
+    </head>
+    <body>
+        <div id="searchForm" class="container-fluid">
+            <h4>Video Search</h4>
+            <input id="term" type="text" placeholder="Search for videos">
+            <input id="hd" type="checkbox"> HD
+            <button id="search" type="button" class="btn btn-sm btn-xs">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </button>
+            <img id="loader" alt="loader" src="img/ajax-loader.gif" width="16" height="16">
+        </div>
+    
+        <div id="results" class="container-fluid"></div>
+
+		<!-- bootstrap modal -->
+		<div class="modal fade" id="mediaModal" tabindex="-1" data-keyboard="true" role="dialog">
+		    <div class="modal-dialog" role="document">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                    <span aria-hidden="true">&times;</span>
+		                </button>
+		            </div>
+		            <div class="modal-body">
+		                <div class="modal-video">
+		                    <div class="embed-responsive embed-responsive-16by9">
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+    </body>
+</html>
