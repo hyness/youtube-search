@@ -10,13 +10,13 @@
 
 #### Running the server with the [Spring Boot Maven Plugin](https://docs.spring.io/spring-boot/docs/current/maven-plugin/run-mojo.html)
 ```
-[user@host ~]$ mvn -Drun.arguments="--youtube-service.api-key=MY_SERVER_API_KEY" spring-boot:run
+[user@host ~]$ mvn -Drun.arguments="--key=MY_YOUTUBE_API_KEY" spring-boot:run
 ```
 
 #### Building and running an executable jar
 ```
 [user@host ~]$ mvn package
-[user@host ~]$ java -jar target/youtube-search-*.jar --youtube-service.api-key=MY_SERVER_API_KEY
+[user@host ~]$ java -jar target/youtube-search-*.jar --key=MY_YOUTUBE_API_KEY
 ```
 
 #### Accessing the local server
