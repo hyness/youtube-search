@@ -1,9 +1,19 @@
+sudo: required
+
 language: java
+
+services:
+  - docker
+
 jdk:
   - oraclejdk8
+
+before_script:
+  - docker login --username=$HEROKU_USERNAME --password=$HEROKU_AUTH_TOKEN registry.heroku.com
+
+script:
+  - docker build -t registry.heroku.com/$HEROKU_APP/web . 
+    
 after_success:
   - mvn -DserviceJobId=$TRAVIS_JOB_ID jacoco:report coveralls:report
-deploy:
-  provider: heroku
-  api_key: $HEROKU_AUTH_TOKEN
-  app: hyness-video-search
+  - docker push registry.heroku.com/$HEROKU_APP/web
