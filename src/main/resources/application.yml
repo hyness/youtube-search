@@ -10,6 +10,11 @@ security:
         - /img/**
         - /search/**
         - /webjars/**
+        
+server:
+  compression:
+    enabled: true
+    mime-types: application/json,text/html,text/xml,text/plain
 ---
 spring:
   profiles: dev
