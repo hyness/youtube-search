@@ -2,6 +2,9 @@ sudo: required
 
 language: java
 
+env:
+  - APP_ENV=$(if [ "$TRAVIS_BRANCH" == "master" ]; then echo $TRAVIS_BRANCH; else echo develop; fi)
+
 services:
   - docker
 
@@ -12,8 +15,8 @@ before_script:
   - docker login --username=$HEROKU_USERNAME --password=$HEROKU_AUTH_TOKEN registry.heroku.com
 
 script:
-  - docker build -t registry.heroku.com/$HEROKU_APP/web . 
+  - docker build -t registry.heroku.com/$HEROKU_APP_$APP_ENV/web . 
     
 after_success:
   - mvn -DserviceJobId=$TRAVIS_JOB_ID jacoco:report coveralls:report
-  - docker push registry.heroku.com/$HEROKU_APP/web
+  - docker push registry.heroku.com/$HEROKU_APP_$APP_ENV/web
