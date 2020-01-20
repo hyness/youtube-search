@@ -21,20 +21,20 @@ function executeSearch(page, token) {
 	}).done(function(msg) {
 		var response = $("#results").empty();
 		
-		if (msg.totalResults != 0) {
+		if (msg.pageInfo.totalResults != 0) {
 			page = typeof page !== 'undefined' ?  parseInt(page) : 1;
-			var startIndex = ((page - 1) * msg.resultsPerPage) + 1;
-			var endIndex = Math.min(page * msg.resultsPerPage, msg.totalResults);
+			var startIndex = ((page - 1) * msg.pageInfo.resultsPerPage) + 1;
+			var endIndex = Math.min(page * msg.pageInfo.resultsPerPage, msg.pageInfo.totalResults);
 			var prevLink = msg.prevPageToken != null ? $('<a class="page" href="#">prev</a>').attr('pageNo', page - 1).attr('id', msg.prevPageToken) : 'prev';
 			var nextLink = msg.nextPageToken != null ? $('<a class="page" href="#">next</a>').attr('pageNo', page + 1).attr('id', msg.nextPageToken) : 'next';
 			var nav = $('<span class="nav"></span>').append(prevLink).append(' | ').append(nextLink);
 			
-			response.append($('<span></span>').append('Showing ' + startIndex + '-' + endIndex + ' of ' + msg.totalResults + ' videos'))
+			response.append($('<span></span>').append('Showing ' + startIndex + '-' + endIndex + ' of ' + msg.pageInfo.totalResults + ' videos'))
 				.append(nav.clone());
 			var links = $('<ol></ol>').attr('start', startIndex);
 			$(msg.items).each(function(){
 				links.append($('<li></li>').append(
-					$('<a class="dynamiclink" href="#"></a>').attr('id', this.id).html(this.title)
+					$('<a class="dynamiclink" href="#"></a>').attr('id', this.id.id).html(this.snippet.title)
 				));
 			});
 			response.append(links).append(nav.clone());

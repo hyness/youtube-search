@@ -1,7 +1,4 @@
-.classpath
-.project
-.settings
+.*
+*.iml
+build
 target
-/.apt_generated/
-.factorypath
-/.springBeans

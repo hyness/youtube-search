@@ -1,2 +1,2 @@
-youtube-service:
-  api-key: fake
+youtube-search:
+  api-key: "fake"

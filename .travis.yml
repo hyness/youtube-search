@@ -9,7 +9,7 @@ services:
   - docker
 
 jdk:
-  - oraclejdk8
+  - openjdk11
 
 before_script:
   - docker login --username=$HEROKU_USERNAME --password=$HEROKU_AUTH_TOKEN registry.heroku.com
@@ -18,5 +18,5 @@ script:
   - docker build -t registry.heroku.com/$HEROKU_APP-$APP_ENV/web . 
     
 after_success:
-  - mvn -DserviceJobId=$TRAVIS_JOB_ID jacoco:report coveralls:report
+  - ./gradlew jacocoTestReport coveralls
   - docker push registry.heroku.com/$HEROKU_APP-$APP_ENV/web

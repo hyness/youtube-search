@@ -1,6 +1,7 @@
-youtube-service:
-  api-key: ${key}
-  search-url: https://www.googleapis.com/youtube/v3/search?q={term}&type=video&videoDefinition={videoDefinition}&pageToken={pageToken}&maxResults={maxResults}&key={key}&part=snippet&relevanceLanguage=en
+youtube-search:
+    max-results: 20
+    api-key: ${key:}
+    search-url: https://www.googleapis.com/youtube/v3/search?q={term}&type=video&videoDefinition={videoDefinition}&pageToken={pageToken}&maxResults={maxResults}&key={key}&part=snippet&relevanceLanguage=en
 
 security:
     ignored:
