@@ -2,7 +2,7 @@ package org.freshlegacycode.video
 
 import org.freshlegacycode.video.VideoDefinition.ANY
 import org.junit.jupiter.api.Test
-import org.mockito.BDDMockito
+import org.mockito.BDDMockito.given
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
 import org.springframework.boot.test.context.SpringBootTest
@@ -34,7 +34,7 @@ class SearchApiTest {
         val now = Instant.now()
         val item = Item("item etag", Id("video id"), Snippet("title", "desc", now))
         val result = Result("etag", "p", "n", PageInfo(100, 10), listOf(item))
-        BDDMockito.given(service.search("test", ANY)).willReturn(Mono.just(result))
+        given(service.search("test", ANY)).willReturn(Mono.just(result))
 
         webClient.get()
             .uri("/search/test")
@@ -50,5 +50,6 @@ class SearchApiTest {
             .jsonPath("$.items[0].id.id").isEqualTo("video id")
             .jsonPath("$.items[0].snippet.title").isEqualTo("title")
             .jsonPath("$.items[0].snippet.description").isEqualTo("desc")
+            .jsonPath("$.items[0].snippet.publishedAt").isEqualTo(now.toString())
     }
 }
