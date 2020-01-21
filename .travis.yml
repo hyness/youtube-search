@@ -11,12 +11,15 @@ services:
 jdk:
   - openjdk11
 
+install: skip
+
 before_script:
   - docker login --username=$HEROKU_USERNAME --password=$HEROKU_AUTH_TOKEN registry.heroku.com
 
 script:
-  - docker build -t registry.heroku.com/$HEROKU_APP-$APP_ENV/web . 
-    
+  - ./gradlew build --continue
+  - docker build -t registry.heroku.com/$HEROKU_APP-$APP_ENV/web .
+
 after_success:
   - ./gradlew jacocoTestReport coveralls
   - docker push registry.heroku.com/$HEROKU_APP-$APP_ENV/web
