@@ -1,4 +1,5 @@
 .*
+!.travis.yml
 *.iml
 build
 target
