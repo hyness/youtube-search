@@ -57,15 +57,13 @@ tasks.withType<KotlinCompile> {
     }
 }
 
+tasks.test {
+    finalizedBy("jacocoTestReport")
+}
+
 tasks.jacocoTestReport {
     reports {
         xml.isEnabled = true
         html.isEnabled = false
-    }
-}
-
-sonarqube {
-    properties {
-        property("sonar.projectKey", "hyness_youtube-search")
     }
 }
