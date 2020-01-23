@@ -64,6 +64,8 @@ tasks.jacocoTestReport {
     }
 }
 
-tasks.sonarqube {
-    properties["sonar.projectKey"] = "hyness_youtube-search"
+sonarqube {
+    properties {
+        property("sonar.projectKey", "hyness_youtube-search")
+    }
 }
