@@ -1,1 +1,0 @@
-web:    java $JAVA_OPTS -jar target/youtube-search-*.jar --server.port=$PORT
