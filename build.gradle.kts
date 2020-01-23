@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("jacoco")
+    id("org.sonarqube") version "2.8"
     id("org.springframework.boot") version "2.2.4.RELEASE"
     id("io.spring.dependency-management") version "1.0.9.RELEASE"
     id("com.github.kt3k.coveralls") version "2.9.0"
@@ -61,4 +62,8 @@ tasks.jacocoTestReport {
         xml.isEnabled = true
         html.isEnabled = false
     }
+}
+
+tasks.sonarqube {
+    properties["sonar.projectKey"] = "hyness_youtube-search"
 }
