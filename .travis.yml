@@ -16,7 +16,7 @@ addons:
             secure: "JAaPq4PvJByqRbl393SKbIZ8QPDsrckulVk81wB7mH3IUAHLkcf15ZCeW5FShvEaiDTbrTYqMMD5pCLNKVG23fPWqC+D2gYZL2STOsWqMLCPMpMmn61fsq1f8x5W9nUylMh0B+xW7SnmpJ346kbwoJTALVelXvmGcEsNcM3+0PvxzFtzkfGj3FLix9HbPlp9ONVJnVv2ACPor/8PImJBNQ7rRSv4erT1OCy9zTc8BM3n8QGyGPqPnYbEyKARF31v0IjfAKPETcXSasGYwsSeSQQihyfv7+6MUOliEK0fA9a6tb1cuZj2xYeB9ktAdpp6n3oxgTocNFFf4ioWFzS37aWv3UYEqejCTgDtMiQYKauz0NEkopT0NhIUxxBmnMAnToAit2XTsV6p6nkKKqal9k6Dp4aaHCbEFn8qMpRC5YMnxc0/6ciZu6anrbIXUxYautL9p1ocv65f5Ud5gvQkXaujVxatfue8vw7CbLp2/p2as3WkNWuYr39TeYAHnLkfymbEscYBysr34YEXcNjkwZAhCOclosz2YNAtZOE/BBiEj9kEUkWkzmj0KkjTawe4Pkr8mSa0t1NbzetODDDQffncwoiI4wpwCnDe4apXaUKDzS2OT6seVPlyck4Ccw+uudHLBd5h+6UkhhizPLMmSPRbMMkYU8zDLvmRAdzNxnk="
 
 script:
-  - ./gradlew sonarrqube
+  - ./gradlew sonarqube
 
 after_success:
     - if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
