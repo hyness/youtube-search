@@ -15,10 +15,14 @@ addons:
         token:
             secure: "JAaPq4PvJByqRbl393SKbIZ8QPDsrckulVk81wB7mH3IUAHLkcf15ZCeW5FShvEaiDTbrTYqMMD5pCLNKVG23fPWqC+D2gYZL2STOsWqMLCPMpMmn61fsq1f8x5W9nUylMh0B+xW7SnmpJ346kbwoJTALVelXvmGcEsNcM3+0PvxzFtzkfGj3FLix9HbPlp9ONVJnVv2ACPor/8PImJBNQ7rRSv4erT1OCy9zTc8BM3n8QGyGPqPnYbEyKARF31v0IjfAKPETcXSasGYwsSeSQQihyfv7+6MUOliEK0fA9a6tb1cuZj2xYeB9ktAdpp6n3oxgTocNFFf4ioWFzS37aWv3UYEqejCTgDtMiQYKauz0NEkopT0NhIUxxBmnMAnToAit2XTsV6p6nkKKqal9k6Dp4aaHCbEFn8qMpRC5YMnxc0/6ciZu6anrbIXUxYautL9p1ocv65f5Ud5gvQkXaujVxatfue8vw7CbLp2/p2as3WkNWuYr39TeYAHnLkfymbEscYBysr34YEXcNjkwZAhCOclosz2YNAtZOE/BBiEj9kEUkWkzmj0KkjTawe4Pkr8mSa0t1NbzetODDDQffncwoiI4wpwCnDe4apXaUKDzS2OT6seVPlyck4Ccw+uudHLBd5h+6UkhhizPLMmSPRbMMkYU8zDLvmRAdzNxnk="
 
+before_install:
+    - sudo apt-get install jq
+    - curl -LSs $(curl -LSs https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({name, browser_download_url} | select(.name | endswith(".jar"))) | .[0].browser_download_url')" -o codacy-coverage-reporter-assembly.jar
+
 script:
   - ./gradlew test
   - sonar-scanner
 
 after_success:
-    - if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
+    - java -jar codacy-coverage-reporter-assembly.jar report -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
     - bash <(curl -s https://codecov.io/bash)
