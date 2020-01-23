@@ -5,5 +5,5 @@ build:
   advancedReporting: true
   ci:
     - mkdir -p shippable/codecoverage
-    - gradle build jacocoTestReport
+    - ./gradlew build jacocoTestReport
     - cp -r build shippable/codecoverage
