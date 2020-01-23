@@ -3,6 +3,7 @@
 
 [![Travis branch](https://img.shields.io/travis/hyness/youtube-search/develop.svg?style=flat-square)](https://travis-ci.org/hyness/youtube-search)
 [![Coverage Status](https://coveralls.io/repos/github/hyness/youtube-search/badge.svg?branch=develop)](https://coveralls.io/github/hyness/youtube-search?branch=develop)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5cf21d9dc86b48d08b679e33eff9fa9d)](https://www.codacy.com/manual/hyness/youtube-search?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hyness/youtube-search&amp;utm_campaign=Badge_Grade)
 
 ### Prerequisites
 * [A free YouTube v3 API key](https://developers.google.com/youtube/registering_an_application#Create_API_Keys)
