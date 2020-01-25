@@ -3,15 +3,19 @@ language: java
 jdk:
   - openjdk11
 
+cache:
+  directories:
+    - $HOME/.gradle
+
 after_success:
-    - bash <(curl -s https://codecov.io/bash)
-    - bash <(curl -Ls https://coverage.codacy.com/get.sh)
-    - ./gradlew coveralls
+  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -Ls https://coverage.codacy.com/get.sh)
+  - ./gradlew coveralls
 
 deploy:
-    provider: heroku
-    api_key:
-        secure: U1O5Hx3z4WNTLs3EF3mHxhOuFyLrnadeWnF5d8QJ8VWv3eXq7EpAUox84kxg3dwMhOqe6g5C2xlchQVqoc6OXpAjMvvsPiuNQXW+l68uILGws6aXDdxunyO6nWZYmx1hHLsRCIEjK5J3uqzReM6Xr7Q2FwB8m4uMI7CHaalxDnzTGmDcl3IIONEuEYQnIn3wmbiC11F4V9wph9hlWSa8Q88+HO9Bu3yEcVCj3ISTiIzvkOaA40RkDdsLdBzHZSm8KV7eNDudMEkN6KHvsx0ywGH9yOYcud8jjfguFMlcC+JvaiR4B7C/DTM8LVRh0Mz+Filojbo6OQ7aV2r95klm1VIZe6RDbU4Lj2S6HYwEdSwfP7+5RfcmvXXRKZ13077lr9JUGQuIA2Wv+elK3CellHQXC1pO3YNkGR8OoGQRwpGTiMn4a75g3uwBlFVdF/lxZL+bv15inPSr2b/wWTUFSRypvi9ljbpozeAhKcluglX61wgvoNEDUNILl4EZ2CyBEGGLWMtpRow8XCZjpDdB5Y/KOfRKt7U6G0dQ27C/GIzuCbGjVkzXgtscUWqfsLnyX247Nmy4antT7iWsEtX1NOHD/nb0Xqr4pgJ0YdHDfr0uCeJBciZeF+4sY6giwVgfWusqjJT1K5vHWXPLmvPp0+xp996H1eVIisn7LREFEd8=
-    app:
-        master: hyness-video-search
-        develop: hyness-video-search-develop
+  provider: heroku
+  api_key:
+    secure: U1O5Hx3z4WNTLs3EF3mHxhOuFyLrnadeWnF5d8QJ8VWv3eXq7EpAUox84kxg3dwMhOqe6g5C2xlchQVqoc6OXpAjMvvsPiuNQXW+l68uILGws6aXDdxunyO6nWZYmx1hHLsRCIEjK5J3uqzReM6Xr7Q2FwB8m4uMI7CHaalxDnzTGmDcl3IIONEuEYQnIn3wmbiC11F4V9wph9hlWSa8Q88+HO9Bu3yEcVCj3ISTiIzvkOaA40RkDdsLdBzHZSm8KV7eNDudMEkN6KHvsx0ywGH9yOYcud8jjfguFMlcC+JvaiR4B7C/DTM8LVRh0Mz+Filojbo6OQ7aV2r95klm1VIZe6RDbU4Lj2S6HYwEdSwfP7+5RfcmvXXRKZ13077lr9JUGQuIA2Wv+elK3CellHQXC1pO3YNkGR8OoGQRwpGTiMn4a75g3uwBlFVdF/lxZL+bv15inPSr2b/wWTUFSRypvi9ljbpozeAhKcluglX61wgvoNEDUNILl4EZ2CyBEGGLWMtpRow8XCZjpDdB5Y/KOfRKt7U6G0dQ27C/GIzuCbGjVkzXgtscUWqfsLnyX247Nmy4antT7iWsEtX1NOHD/nb0Xqr4pgJ0YdHDfr0uCeJBciZeF+4sY6giwVgfWusqjJT1K5vHWXPLmvPp0+xp996H1eVIisn7LREFEd8=
+  app:
+    master: hyness-video-search
+    develop: hyness-video-search-develop
