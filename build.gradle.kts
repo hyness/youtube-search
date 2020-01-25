@@ -67,3 +67,7 @@ tasks.jacocoTestReport {
         html.isEnabled = false
     }
 }
+
+coveralls {
+    sourceDirs = listOf("src/main/kotlin")
+}
