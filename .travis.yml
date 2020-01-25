@@ -3,6 +3,9 @@ language: java
 jdk:
   - openjdk11
 
+after_success:
+    - bash <(curl -s https://codecov.io/bash)
+
 deploy:
     provider: heroku
     api_key:
