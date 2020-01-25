@@ -2,6 +2,7 @@
 [Spring Boot](http://projects.spring.io/spring-boot/) / [jQuery](https://jquery.com/) / [Bootstrap](https://getbootstrap.com/) app for searching for YouTube videos with the v3 api
 
 [![Travis branch](https://img.shields.io/travis/hyness/youtube-search/develop.svg?style=flat-square)](https://travis-ci.org/hyness/youtube-search)
+[![Codecov Badge](https://img.shields.io/codecov/c/github/hyness/youtube-search)](https://codecov.io/gh/hyness/youtube-search/branch/develop)
 [![Coverage Status](https://coveralls.io/repos/github/hyness/youtube-search/badge.svg?branch=develop)](https://coveralls.io/github/hyness/youtube-search?branch=develop)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5cf21d9dc86b48d08b679e33eff9fa9d)](https://www.codacy.com/manual/hyness/youtube-search?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hyness/youtube-search&amp;utm_campaign=Badge_Grade)
 
