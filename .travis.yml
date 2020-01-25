@@ -1,28 +1,12 @@
-sudo: required
 language: java
-env:
-  - APP_ENV=$(if [ "$TRAVIS_BRANCH" == "master" ]; then echo $TRAVIS_BRANCH; else echo develop; fi)
-
-services:
-  - docker
 
 jdk:
   - openjdk11
 
-addons:
-    sonarcloud:
-        organization: "hyness"
-        token:
-            secure: "JAaPq4PvJByqRbl393SKbIZ8QPDsrckulVk81wB7mH3IUAHLkcf15ZCeW5FShvEaiDTbrTYqMMD5pCLNKVG23fPWqC+D2gYZL2STOsWqMLCPMpMmn61fsq1f8x5W9nUylMh0B+xW7SnmpJ346kbwoJTALVelXvmGcEsNcM3+0PvxzFtzkfGj3FLix9HbPlp9ONVJnVv2ACPor/8PImJBNQ7rRSv4erT1OCy9zTc8BM3n8QGyGPqPnYbEyKARF31v0IjfAKPETcXSasGYwsSeSQQihyfv7+6MUOliEK0fA9a6tb1cuZj2xYeB9ktAdpp6n3oxgTocNFFf4ioWFzS37aWv3UYEqejCTgDtMiQYKauz0NEkopT0NhIUxxBmnMAnToAit2XTsV6p6nkKKqal9k6Dp4aaHCbEFn8qMpRC5YMnxc0/6ciZu6anrbIXUxYautL9p1ocv65f5Ud5gvQkXaujVxatfue8vw7CbLp2/p2as3WkNWuYr39TeYAHnLkfymbEscYBysr34YEXcNjkwZAhCOclosz2YNAtZOE/BBiEj9kEUkWkzmj0KkjTawe4Pkr8mSa0t1NbzetODDDQffncwoiI4wpwCnDe4apXaUKDzS2OT6seVPlyck4Ccw+uudHLBd5h+6UkhhizPLMmSPRbMMkYU8zDLvmRAdzNxnk="
-
-before_install:
-    - sudo apt-get install jq
-    - curl -LSs $(curl -LSs https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({name, browser_download_url} | select(.name | endswith(".jar"))) | .[0].browser_download_url')" -o codacy-coverage-reporter-assembly.jar
-
-script:
-  - ./gradlew test
-  - sonar-scanner
-
-after_success:
-    - java -jar codacy-coverage-reporter-assembly.jar report -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
-    - bash <(curl -s https://codecov.io/bash)
+deploy:
+    provider: heroku
+    api_key:
+        secure: U1O5Hx3z4WNTLs3EF3mHxhOuFyLrnadeWnF5d8QJ8VWv3eXq7EpAUox84kxg3dwMhOqe6g5C2xlchQVqoc6OXpAjMvvsPiuNQXW+l68uILGws6aXDdxunyO6nWZYmx1hHLsRCIEjK5J3uqzReM6Xr7Q2FwB8m4uMI7CHaalxDnzTGmDcl3IIONEuEYQnIn3wmbiC11F4V9wph9hlWSa8Q88+HO9Bu3yEcVCj3ISTiIzvkOaA40RkDdsLdBzHZSm8KV7eNDudMEkN6KHvsx0ywGH9yOYcud8jjfguFMlcC+JvaiR4B7C/DTM8LVRh0Mz+Filojbo6OQ7aV2r95klm1VIZe6RDbU4Lj2S6HYwEdSwfP7+5RfcmvXXRKZ13077lr9JUGQuIA2Wv+elK3CellHQXC1pO3YNkGR8OoGQRwpGTiMn4a75g3uwBlFVdF/lxZL+bv15inPSr2b/wWTUFSRypvi9ljbpozeAhKcluglX61wgvoNEDUNILl4EZ2CyBEGGLWMtpRow8XCZjpDdB5Y/KOfRKt7U6G0dQ27C/GIzuCbGjVkzXgtscUWqfsLnyX247Nmy4antT7iWsEtX1NOHD/nb0Xqr4pgJ0YdHDfr0uCeJBciZeF+4sY6giwVgfWusqjJT1K5vHWXPLmvPp0+xp996H1eVIisn7LREFEd8=
+    app:
+        master: hyness-video-search
+        develop: hyness-video-search-develop
