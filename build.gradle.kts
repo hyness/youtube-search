@@ -1,4 +1,6 @@
+import com.moowork.gradle.node.npm.NpmInstallTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import com.moowork.gradle.node.npm.NpmTask
 
 plugins {
     id("jacoco")
@@ -6,6 +8,8 @@ plugins {
     id("org.springframework.boot") version "2.2.4.RELEASE"
     id("io.spring.dependency-management") version "1.0.9.RELEASE"
     id("com.github.kt3k.coveralls") version "2.9.0"
+//    id("com.moowork.node") version "1.3.1"
+    id("com.github.node-gradle.node") version "2.2.0"
     kotlin("jvm") version "1.3.61"
     kotlin("plugin.spring") version "1.3.61"
 }
@@ -56,9 +60,29 @@ tasks.withType<KotlinCompile> {
         jvmTarget = "1.8"
     }
 }
+node {
+    version = "10.16.2"
+    npmVersion = "6.13.4"
+    download = true
+}
 
 tasks.test {
     finalizedBy("jacocoTestReport")
+}
+
+tasks.create<NpmTask>("npmBuild") {
+    setWorkingDir(file("${projectDir}/src/main/frontend"))
+    setArgs(listOf("run", "build"))
+}
+
+tasks.withType<ProcessResources> {
+    dependsOn("copyFrontendToBuild")
+}
+
+tasks.create<Copy>("copyFrontendToBuild") {
+    dependsOn("npmBuild")
+    from("${projectDir}/src/main/frontend/build")
+    into("${buildDir}/resources/main/static")
 }
 
 tasks.jacocoTestReport {
