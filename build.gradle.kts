@@ -1,6 +1,16 @@
-import com.moowork.gradle.node.npm.NpmInstallTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import com.moowork.gradle.node.npm.NpmTask
+
+buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath("org.siouan:frontend-gradle-plugin-jdk11:4.0.1")
+    }
+}
+
+
+apply(plugin = "org.siouan.frontend-jdk11")
 
 plugins {
     id("jacoco")
@@ -8,22 +18,14 @@ plugins {
     id("org.springframework.boot") version "2.2.4.RELEASE"
     id("io.spring.dependency-management") version "1.0.9.RELEASE"
     id("com.github.kt3k.coveralls") version "2.9.0"
-//    id("com.moowork.node") version "1.3.1"
-    id("com.github.node-gradle.node") version "2.2.0"
+    id("org.siouan.frontend-jdk11") version "4.0.1"
     kotlin("jvm") version "1.3.61"
     kotlin("plugin.spring") version "1.3.61"
 }
-
 group = "org.freshlegacycode"
 version = "1.0-SNAPSHSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_11
 
-val developmentOnly by configurations.creating
-configurations {
-    runtimeClasspath {
-        extendsFrom(developmentOnly)
-    }
-}
+java.sourceCompatibility = JavaVersion.VERSION_11
 
 tasks.bootJar {
     archiveVersion.set("")
@@ -43,7 +45,7 @@ dependencies {
     implementation("org.webjars:jquery:1.12.1")
     implementation("org.webjars:bootstrap:3.3.7")
     compileOnly("org.springframework.boot:spring-boot-configuration-processor")
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
+//    developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
@@ -60,19 +62,19 @@ tasks.withType<KotlinCompile> {
         jvmTarget = "1.8"
     }
 }
-node {
-    version = "10.16.2"
-    npmVersion = "6.13.4"
-    download = true
+
+val frontEndDir =  "${projectDir}/src/main/frontend"
+frontend {
+    nodeVersion.set("10.16.2")
+    nodeInstallDirectory.set(file("$projectDir/.gradle/node"))
+    packageJsonDirectory.set(file(frontEndDir))
+    assembleScript.set("run build")
+    cleanScript.set("ci")
+    checkScript.set("run check")
 }
 
 tasks.test {
     finalizedBy("jacocoTestReport")
-}
-
-tasks.create<NpmTask>("npmBuild") {
-    setWorkingDir(file("${projectDir}/src/main/frontend"))
-    setArgs(listOf("run", "build"))
 }
 
 tasks.withType<ProcessResources> {
@@ -80,8 +82,7 @@ tasks.withType<ProcessResources> {
 }
 
 tasks.create<Copy>("copyFrontendToBuild") {
-    dependsOn("npmBuild")
-    from("${projectDir}/src/main/frontend/build")
+    from("$frontEndDir/build")
     into("${buildDir}/resources/main/static")
 }
 

@@ -24,9 +24,7 @@ import javax.validation.constraints.NotBlank
 class YouTubeSearchApplication {
     @Bean
     fun indexRedirectRouter() = router {
-        GET("/") {
-            temporaryRedirect(URI("/index.html")).build()
-        }
+        GET("/") { temporaryRedirect(URI("/index.html")).build() }
     }
 }
 
